@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.ControllerMenu">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="215.0" layoutY="110.0" prefHeight="180.0" prefWidth="171.0" spacing="20.0">
+         <children>
+            <Button fx:id="btn_play" graphicTextGap="0.0" mnemonicParsing="false" onAction="#pressButtonMenu" prefHeight="20.0" prefWidth="171.0" text="Jouer" textAlignment="CENTER" />
+            <Button fx:id="btn_rules" mnemonicParsing="false" onAction="#pressButtonMenu" prefHeight="25.0" prefWidth="175.0" text="Règles" />
+            <Button fx:id="btn_option" graphicTextGap="0.0" lineSpacing="4.0" mnemonicParsing="false" onAction="#pressButtonMenu" prefHeight="25.0" prefWidth="175.0" text="Options" />
+            <Button fx:id="btn_quit" mnemonicParsing="false" onAction="#pressButtonMenu" prefHeight="21.0" prefWidth="171.0" text="Quitter" />
+
+         </children>
+          <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>
