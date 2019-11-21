@@ -7,12 +7,13 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 public class View {
-    public ViewMenu viewMenu;
-    public ViewParty viewParty;
+    private ViewMenu viewMenu;
+    ViewParty viewParty;
+    private Model model;
 
-    public View(){
+    public View(Model model){
         viewMenu = new ViewMenu();
-        viewParty = new ViewParty();
+        viewParty = new ViewParty(model);
     }
 
     public Scene getScene() throws IOException {

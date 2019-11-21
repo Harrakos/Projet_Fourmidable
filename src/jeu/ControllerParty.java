@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class ControllerParty{
+public class ControllerParty {
     public Model model;
     private ViewParty viewParty;
 

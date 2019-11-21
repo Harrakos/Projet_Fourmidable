@@ -14,22 +14,23 @@ import java.awt.event.ActionEvent;
 public class ViewParty{
 
 
-    private Model modelParty;
+    ControllerParty controllerParty;
+    private Model model;
     AnchorPane p = new AnchorPane();
 
     public Button lancerbtn;
 
-    public ViewParty() {
-        lancerbtn = new Button( "cooucou les bgs");
+    public ViewParty(Model model) {
+        this.model = model;
+        lancerbtn = new Button("cooucou les bgs");
 
 
-        lancerbtn.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                new EventHandler<MouseEvent>() {
-                    @Override public void handle(MouseEvent e) {
-                        System.out.println("coucou");
-                    }
-                });
 
-       p.getChildren().add(lancerbtn);
+
+        controllerParty = new ControllerParty(model,this);
+        //lancerbtn.addEventHandler();
+
+
+
     }
 }
