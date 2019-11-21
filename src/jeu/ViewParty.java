@@ -20,7 +20,7 @@ public class ViewParty{
     public Button lancerbtn;
 
     public ViewParty() {
-        lancerbtn = new Button( "co");
+        lancerbtn = new Button( "cooucou les bgs");
 
 
         lancerbtn.addEventHandler(MouseEvent.MOUSE_ENTERED,
