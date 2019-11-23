@@ -1,5 +1,6 @@
 package jeu;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,12 +10,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import java.awt.event.ActionEvent;
-
 public class ViewParty{
 
 
-    ControllerParty controllerParty;
+    private ControllerParty controllerParty;
     private Model model;
     AnchorPane p = new AnchorPane();
 
@@ -24,12 +23,16 @@ public class ViewParty{
         this.model = model;
         lancerbtn = new Button("cooucou les bgs");
 
+        p.getChildren().add(lancerbtn);
+
 
 
 
         controllerParty = new ControllerParty(model,this);
-        //lancerbtn.addEventHandler();
-
+        lancerbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) { controllerParty.lancer_parti();}
+        });
 
 
     }
