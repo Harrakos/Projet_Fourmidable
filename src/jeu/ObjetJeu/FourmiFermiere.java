@@ -1,8 +1,10 @@
 package jeu.ObjetJeu;
 
+import javafx.scene.image.Image;
+
 public class FourmiFermiere extends Fourmi {
-    public FourmiFermiere() {
-        super();
+    public FourmiFermiere(Image imageFourmiFermiere) {
+        super(imageFourmiFermiere);
     }
 
     @Override

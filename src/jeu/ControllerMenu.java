@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -261,11 +262,11 @@ public class ControllerMenu implements EventHandler {
                     joueur.getListeObjectif().add(new ObjectifFermier());
 
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_chasseuse.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiChasseuse());
+                    joueur.getListeFourmi().add(new FourmiChasseuse(new Image("jeu/Images/fourmi.png")));
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_creuseuse.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiCreuseuse());
+                    joueur.getListeFourmi().add(new FourmiCreuseuse(new Image("jeu/Images/fourmi.png")));
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_fermiere.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiFermiere());
+                    joueur.getListeFourmi().add(new FourmiFermiere(new Image("jeu/Images/fourmi.png")));
                 joueurEnSelection++;
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/SelectionFourmi/ChoixFourmiObjectif.fxml"));

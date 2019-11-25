@@ -1,14 +1,17 @@
 package jeu;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import jeu.ObjetJeu.FourmiChasseuse;
 import jeu.ObjetJeu.Objectif;
 
 import javax.swing.*;
@@ -24,6 +27,8 @@ public class ControllerParty {
     private Image terrier = new Image("jeu/Images/plateau_indi.jpg");
     private BackgroundImage bk_image_terrier = new BackgroundImage(terrier,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
+    private FourmiChasseuse fourmiChasseuse;
+
     ControllerParty(Model model, ViewParty viewParty) {
         this.model = model;
         this.viewParty = viewParty;
@@ -36,7 +41,6 @@ public class ControllerParty {
         viewParty.p.getScene().getWindow().setWidth(950);
         viewParty.p.setBackground(new Background(bk_image_plateau));
 
-
         viewParty.ajoutAttribut();
 
         model.setCurrentPlayer(model.listeJoueurs.get(0));
@@ -44,14 +48,16 @@ public class ControllerParty {
         viewParty.positionnerXY(viewParty.nom_joueur,30,10);
         viewParty.p.getChildren().add(viewParty.nom_joueur);
 
-
         viewParty.liste_objectif = new Label("Objectif : \n");
         for (Objectif o : model.getCurrentPlayer().getListeObjectif()) {
             viewParty.liste_objectif.setText(viewParty.liste_objectif.getText()+o+"\n \n");
         }
-
         viewParty.positionnerXY( viewParty.liste_objectif,40,50);
         viewParty.p.getChildren().add(viewParty.liste_objectif);
+
+         fourmiChasseuse = new FourmiChasseuse(new Image("jeu/Images/fourmi.png"));
+         viewParty.positionnerXY(fourmiChasseuse.imageFourmi,100,100);
+         viewParty.p.getChildren().add(fourmiChasseuse.imageFourmi);
 
 
     }
@@ -61,19 +67,20 @@ public class ControllerParty {
             viewParty.p.setBackground(new Background(bk_image_terrier));
             viewParty.p.getChildren().remove(viewParty.rectangle_objectif);
             viewParty.p.getChildren().remove(viewParty.liste_objectif);
-
         }
         else{
             viewParty.p.setBackground(new Background(bk_image_plateau));
             viewParty.p.getChildren().add(viewParty.rectangle_objectif);
             viewParty.p.getChildren().add(viewParty.liste_objectif);
-
         }
-
     }
 
+    public void deplacer_fourmi(MouseEvent event){
+                fourmiChasseuse.imageFourmi.setX(event.getX()-217.5);
+                fourmiChasseuse.imageFourmi.setY(event.getY()-217.5);
+            }
 
 
 
 
-}
+    }

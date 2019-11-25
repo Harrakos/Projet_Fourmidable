@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.w3c.dom.ls.LSOutput;
 
 import java.awt.event.MouseListener;
 
@@ -66,9 +67,9 @@ public class ViewParty {
         });
         p.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) {
-                System.out.println(event.getX());
+            public void handle(MouseEvent event) { controllerParty.deplacer_fourmi(event);
             }
+
         });
 
 

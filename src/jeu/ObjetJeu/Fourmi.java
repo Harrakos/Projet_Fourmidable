@@ -1,8 +1,13 @@
 package jeu.ObjetJeu;
 
-public class Fourmi {
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-    public Fourmi() {
+public class Fourmi {
+    public ImageView imageFourmi;
+
+    public Fourmi(Image imageFourmi ) {
+        this.imageFourmi = new ImageView(imageFourmi);
     }
 
 
