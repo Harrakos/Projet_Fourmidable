@@ -14,11 +14,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Model model = new Model();
-        View view = new View();
+        View view = new View(model);
         new Controller(view,model).start();
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Fourmidable");
         primaryStage.setScene(view.getScene());
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         exitApplication(primaryStage);

@@ -1,6 +1,8 @@
 package jeu;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -16,7 +18,7 @@ import jeu.ObjetJeu.*;
 import java.io.IOException;
 
 
-public class ControllerMenu {
+public class ControllerMenu implements EventHandler {
     private static Model model;
     private static View view;
     private static int joueurEnSelection =0;
@@ -301,4 +303,8 @@ public class ControllerMenu {
 
         }
 
+    @Override
+    public void handle(Event event) {
+
+    }
 }
