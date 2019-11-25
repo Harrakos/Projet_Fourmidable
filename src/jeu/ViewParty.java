@@ -40,15 +40,6 @@ public class ViewParty {
         p.getChildren().add(lancerbtn);
 
 
-
-
-
-
-
-
-
-
-
         //controller
 
         controllerParty = new ControllerParty(model,this);
@@ -92,7 +83,7 @@ public class ViewParty {
         positionnerXY(rectangle_objectif,40,50);
         p.getChildren().add(rectangle_objectif);
 
-        positionnerXY(changerVue,720,550);
+        positionnerXY(changerVue,1300,900);
         p.getChildren().add(changerVue);
 
     }

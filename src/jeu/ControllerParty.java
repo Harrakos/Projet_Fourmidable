@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import jeu.ObjetJeu.FourmiChasseuse;
 import jeu.ObjetJeu.Objectif;
+import jeu.ObjetJeu.Ressource;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -37,8 +38,8 @@ public class ControllerParty {
 
     void lancer_parti(){
         viewParty.p.getChildren().clear();
-        viewParty.p.getScene().getWindow().setHeight(680);
-        viewParty.p.getScene().getWindow().setWidth(950);
+        viewParty.p.getScene().getWindow().setWidth(1429);
+        viewParty.p.getScene().getWindow().setHeight(1000);
         viewParty.p.setBackground(new Background(bk_image_plateau));
 
         viewParty.ajoutAttribut();
@@ -76,8 +77,16 @@ public class ControllerParty {
     }
 
     public void deplacer_fourmi(MouseEvent event){
-                fourmiChasseuse.imageFourmi.setX(event.getX()-217.5);
-                fourmiChasseuse.imageFourmi.setY(event.getY()-217.5);
+        for (Ressource r : model.getListeRessourcesDispo()){
+            if (Math.pow(event.getX()-r.getPosX(),2)+(Math.pow(event.getY()-r.getPosY(),2))<Math.pow(r.getRayon(),2)){
+                System.out.println("ta cliquer sur une ressource");
+                fourmiChasseuse.imageFourmi.setX(r.getPosX()-107.5);
+                fourmiChasseuse.imageFourmi.setY(r.getPosY()-107.5);
+            }
+        }
+
+
+
             }
 
 
