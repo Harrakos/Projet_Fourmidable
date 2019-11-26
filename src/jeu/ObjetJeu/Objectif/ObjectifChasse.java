@@ -1,4 +1,4 @@
-package jeu.ObjetJeu;
+package jeu.ObjetJeu.Objectif;
 
 public class ObjectifChasse extends Objectif {
     public ObjectifChasse() {

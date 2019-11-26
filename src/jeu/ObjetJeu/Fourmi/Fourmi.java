@@ -1,4 +1,4 @@
-package jeu.ObjetJeu;
+package jeu.ObjetJeu.Fourmi;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

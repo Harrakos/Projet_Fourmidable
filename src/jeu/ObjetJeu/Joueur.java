@@ -1,6 +1,9 @@
 package jeu.ObjetJeu;
 
 import javafx.scene.paint.Color;
+import jeu.ObjetJeu.Fourmi.Fourmi;
+import jeu.ObjetJeu.Objectif.Objectif;
+import jeu.ObjetJeu.Ressource.Tuile;
 
 import java.util.ArrayList;
 
@@ -9,7 +12,7 @@ public class Joueur {
     private Color couleur;
     private ArrayList<Objectif> listeObjectif;
     private ArrayList<Fourmi> listeFourmi;
-    private ArrayList<Ressource> listeRessource;
+    private ArrayList<Tuile> listeRessource;
 
     public Joueur(String pseudo, Color couleur) {
         this.pseudo = pseudo;
@@ -40,12 +43,12 @@ public class Joueur {
         this.listeFourmi = listeFourmi;
     }
 
-    public ArrayList<Ressource> getListeRessource() {
+    public ArrayList<Tuile> getListeRessource() {
         return listeRessource;
     }
 
-    public void setListeRessource(ArrayList<Ressource> listeRessource) {
-        this.listeRessource = listeRessource;
+    public void setListeRessource(ArrayList<Tuile> listeTuile) {
+        this.listeRessource = listeTuile;
     }
 
     public String getPseudo() {

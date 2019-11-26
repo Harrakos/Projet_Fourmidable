@@ -83,7 +83,7 @@ public class ViewParty {
         positionnerXY(rectangle_objectif,40,50);
         p.getChildren().add(rectangle_objectif);
 
-        positionnerXY(changerVue,1300,900);
+        positionnerXY(changerVue,900,700);
         p.getChildren().add(changerVue);
 
     }

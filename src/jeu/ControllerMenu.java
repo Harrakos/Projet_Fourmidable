@@ -15,6 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jeu.ObjetJeu.*;
+import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
+import jeu.ObjetJeu.Fourmi.FourmiCreuseuse;
+import jeu.ObjetJeu.Fourmi.FourmiFermiere;
+import jeu.ObjetJeu.Objectif.ObjectifChasse;
+import jeu.ObjetJeu.Objectif.ObjectifCreuseur;
+import jeu.ObjetJeu.Objectif.ObjectifFermier;
 
 import java.io.IOException;
 
