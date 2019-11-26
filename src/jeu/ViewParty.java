@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import org.w3c.dom.ls.LSOutput;
 
 import java.awt.event.MouseListener;
@@ -31,6 +32,10 @@ public class ViewParty {
     private Model model;
     private TextField xField;
     private Button lancerbtn;
+
+    //test
+
+
 
     ViewParty(Model model) {
         this.model = model;
@@ -60,8 +65,10 @@ public class ViewParty {
             @Override
             public void handle(MouseEvent event) { controllerParty.deplacer_fourmi(event);
             }
-
         });
+
+
+
 
 
 

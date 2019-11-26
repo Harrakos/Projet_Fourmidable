@@ -1,5 +1,7 @@
 package jeu;
 
+import javafx.scene.image.Image;
+import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import jeu.ObjetJeu.Joueur;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileChenille;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileCoccinelle;
@@ -13,19 +15,20 @@ import java.util.ArrayList;
 
 public class Model {
 
+    private int pm;
     private int nbreJoueurs;
     public ArrayList<Joueur> listeJoueurs;
     private Joueur currentPlayer;
     private ArrayList<Tuile> listeRessourcesDispo;
 
+
     public Model(){
         nbreJoueurs = 0;
         listeJoueurs = new ArrayList<>();
         remplissagelisteRessourcesDispo();
+        pm = 3;
+
     }
-
-
-
 
     public int getNbreJoueurs() {
         return nbreJoueurs;
@@ -49,6 +52,13 @@ public class Model {
 
     public void setListeRessourcesDispo(ArrayList<Tuile> listeRessourcesDispo) {
         this.listeRessourcesDispo = listeRessourcesDispo;
+    }
+    public int getPm() {
+        return pm;
+    }
+
+    public void setPm(int pm) {
+        this.pm = pm;
     }
 
     private void remplissagelisteRessourcesDispo(){
@@ -82,7 +92,9 @@ public class Model {
         i = remplissageLigne(11,373,333,tabTuile,i);
         i = remplissageLigne(12,334,356,tabTuile,i);
         i = remplissageLigne(11,296,377,tabTuile,i);
-        i = remplissageLigne(11,296,422,tabTuile,i);
+
+        i = remplissageLigne(12,257.5,400,tabTuile,i);
+
         i = remplissageLigne(8,296,466,tabTuile,i);
         i = remplissageLigne(4,413,580,tabTuile,i);
         i = remplissageLigne(3, 413, 624, tabTuile,i);
