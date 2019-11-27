@@ -40,14 +40,14 @@ public class Tuile {
 
     public void setPosX(double posX) {
         this.posX = posX;
-        surbrillance.setX(posX+7);
+        surbrillance.setX(posX-32);
     }
     public double getPosY() {
         return posY;
     }
     public void setPosY(double posY) {
         this.posY = posY;
-        surbrillance.setY(posY-12);
+        surbrillance.setY(posY-35);
 
     }
 
