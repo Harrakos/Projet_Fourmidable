@@ -1,11 +1,13 @@
 package jeu;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import jeu.ObjetJeu.Fourmi.Fourmi;
 import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
+import jeu.ObjetJeu.Joueur;
 import jeu.ObjetJeu.Objectif.Objectif;
 import jeu.ObjetJeu.Ressource.Tuile;
 
@@ -50,10 +52,26 @@ public class ControllerParty {
         viewParty.positionnerXY(viewParty.liste_objectif, 40, 50);
         viewParty.p.getChildren().add(viewParty.liste_objectif);
 
+
+        //test
         model.getCurrentPlayer().getListeFourmi().get(0).setX(600);
         model.getCurrentPlayer().getListeFourmi().get(0).setY(600);
 
+        model.listeJoueurs.get(4).getListeFourmi().get(1).setX(800);
+        model.listeJoueurs.get(4).getListeFourmi().get(1).setY(600);
+
+        for (Fourmi f: model.getCurrentPlayer().getListeFourmi()) {
+            f.imageFourmi.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    selectionFourmi(event,f);
+                }
+            });
+        }
         viewParty.p.getChildren().add(model.getCurrentPlayer().getListeFourmi().get(0).imageFourmi);
+        System.out.println(model.listeJoueurs);
+        viewParty.p.getChildren().add(model.listeJoueurs.get(4).getListeFourmi().get(1).imageFourmi);
+
     }
 
     public void changerVueTerrierPlateau() {
@@ -69,88 +87,82 @@ public class ControllerParty {
     }
 
     public void deplacer_fourmi(MouseEvent event) {
-        if (!fourmiSelec) {
-            for (Fourmi f : model.getCurrentPlayer().getListeFourmi()) {
-                if (event.getX() > f.imageFourmi.getX() && event.getX() < f.imageFourmi.getX() + 25 && event.getY() > f.imageFourmi.getY() && event.getY() < f.imageFourmi.getY()+25) {
-                    fourmiClique = f;
-                    System.out.println("clique sur fourmi");
-                }
-            }
-            if (fourmiClique != null) {
-                for (Tuile r : model.getListeRessourcesDispo()) {
+        if (fourmiSelec) {
+            for (Tuile r : model.getListeRessourcesDispo()) {
+                if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
                     if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
                         if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
+                            mouvement_fourmi(r);
                         }
                     }
                     if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
                         if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
+                            mouvement_fourmi(r);
                         }
                     }
                     if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
                         if (Math.pow((r.getPosX() - 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
+                            mouvement_fourmi(r);
                         }
                     }
                     if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
                         if (Math.pow((r.getPosX() - 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
+                            mouvement_fourmi(r);
                         }
                     }
 
                 }
             }
-            //fourmiSelec = true;
-            //return;
+
+            //fourmiSelec = false;
         }
-            if (fourmiSelec) {
-                for (Tuile r : model.getListeRessourcesDispo()) {
-                    if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
-                        if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
-                            if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                                fourmiClique.setX(r.getPosX());
-                                fourmiClique.setY(r.getPosY());
-                                System.out.println(r);
-                            }
-                        }
-                        if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
-                            if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                                fourmiClique.setX(r.getPosX());
-                                fourmiClique.setY(r.getPosY());
-                                System.out.println(r);
-                            }
-                        }
-                        if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
-                            if (Math.pow((r.getPosX() - 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                                fourmiClique.setX(r.getPosX());
-                                fourmiClique.setY(r.getPosY());
-                                System.out.println(r);
-                            }
-                        }
-                        if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                            if (Math.pow((r.getPosX() - 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                                fourmiClique.setX(r.getPosX());
-                                fourmiClique.setY(r.getPosY());
-                                System.out.println(r);
-                            }
-                        }
+    }
 
+    private void mouvement_fourmi(Tuile r) {
+        fourmiClique.setX(r.getPosX());
+        fourmiClique.setY(r.getPosY());
+        System.out.println(r);
+        //for (Tuile t : model.getListeRessourcesDispo()) {
+       //     viewParty.p.getChildren().remove(t.surbrillance);
+      //  }
+    }
+
+    private void selectionFourmi(MouseEvent event, Fourmi f){
+        {
+            for (Tuile r : model.getListeRessourcesDispo()) {
+                viewParty.p.getChildren().remove(r.surbrillance);
+            }
+            fourmiClique = f;
+            fourmiSelec = true;
+            for (Tuile r : model.getListeRessourcesDispo()) {
+                if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
+                    if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                        viewParty.p.getChildren().add(r.surbrillance);
                     }
                 }
-            }
-            if (!fourmiSelec)
-                fourmiSelec = true;
-            else {
-                for (Tuile r: model.getListeRessourcesDispo()){
-                    viewParty.p.getChildren().remove(r.surbrillance);
+                if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
+                    if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                        viewParty.p.getChildren().add(r.surbrillance);
+                    }
                 }
-                fourmiSelec = false;
-                fourmiClique = null;
+                if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
+                    if (Math.pow((r.getPosX() - 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                        viewParty.p.getChildren().add(r.surbrillance);
+                    }
+                }
+                if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
+                    if (Math.pow((r.getPosX() - 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                        viewParty.p.getChildren().add(r.surbrillance);
+                    }
+                }
+
             }
+        }
 
     }
+
 }
+
 
 
 
