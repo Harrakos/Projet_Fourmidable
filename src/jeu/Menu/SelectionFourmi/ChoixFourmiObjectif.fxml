@@ -62,7 +62,7 @@
             </Button>
          </children>
       </HBox>
-      <Label fx:id="cpt_fourmi_total" alignment="CENTER" layoutX="433.0" layoutY="200.0" prefHeight="46.0" prefWidth="70.0" text="0/6">
+      <Label fx:id="cpt_fourmi_total" alignment="CENTER" layoutX="433.0" layoutY="200.0" prefHeight="46.0" prefWidth="70.0" text="0/3">
          <font>
             <Font size="31.0" />
          </font>

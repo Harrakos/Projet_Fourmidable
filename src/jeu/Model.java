@@ -1,6 +1,7 @@
 package jeu;
 
 import javafx.scene.image.Image;
+import jeu.ObjetJeu.Fourmi.Fourmi;
 import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import jeu.ObjetJeu.Joueur;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileChenille;
@@ -20,14 +21,15 @@ public class Model {
     public ArrayList<Joueur> listeJoueurs;
     private Joueur currentPlayer;
     private ArrayList<Tuile> listeRessourcesDispo;
+    private ArrayList<Fourmi> listeFourmisPlateau;
 
 
     public Model(){
         nbreJoueurs = 0;
         listeJoueurs = new ArrayList<>();
+        listeFourmisPlateau = new ArrayList<>();
         remplissagelisteRessourcesDispo();
         pm = 3;
-
     }
 
     public int getNbreJoueurs() {
@@ -53,6 +55,14 @@ public class Model {
     public void setListeRessourcesDispo(ArrayList<Tuile> listeRessourcesDispo) {
         this.listeRessourcesDispo = listeRessourcesDispo;
     }
+
+    public ArrayList<Fourmi> getListeFourmisPlateau() { return listeFourmisPlateau;
+    }
+
+    public void setListeFourmisPlateau(ArrayList<Fourmi> listeFourmisPlateau) {
+        this.listeFourmisPlateau = listeFourmisPlateau;
+    }
+
     public int getPm() {
         return pm;
     }

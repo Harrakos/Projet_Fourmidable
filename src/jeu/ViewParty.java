@@ -34,9 +34,6 @@ public class ViewParty {
     private Button lancerbtn;
 
     //test
-
-
-
     ViewParty(Model model) {
         this.model = model;
         p = new AnchorPane();
@@ -66,12 +63,6 @@ public class ViewParty {
             public void handle(MouseEvent event) { controllerParty.deplacer_fourmi(event);
             }
         });
-
-
-
-
-
-
     }
 
     private void initAttribut(){
@@ -82,7 +73,6 @@ public class ViewParty {
     }
 
      void ajoutAttribut(){
-
 
         positionnerXY(rectangle_joueur,25,10);
         p.getChildren().add(rectangle_joueur);

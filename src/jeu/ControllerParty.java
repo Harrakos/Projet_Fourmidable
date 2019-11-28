@@ -19,6 +19,7 @@ public class ControllerParty {
 
     private boolean fourmiSelec = false;
     private Fourmi fourmiClique = null;
+    private boolean surPlateau = true;
 
     private Image plateau = new Image("jeu/Images/plateau.jpeg");
     private BackgroundImage bk_image_plateau = new BackgroundImage(plateau, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -52,14 +53,6 @@ public class ControllerParty {
         viewParty.positionnerXY(viewParty.liste_objectif, 40, 50);
         viewParty.p.getChildren().add(viewParty.liste_objectif);
 
-
-        //test
-        model.getCurrentPlayer().getListeFourmi().get(0).setX(600);
-        model.getCurrentPlayer().getListeFourmi().get(0).setY(600);
-
-       // model.listeJoueurs.get(2).getListeFourmi().get(1).setX(800);
-        //model.listeJoueurs.get(2).getListeFourmi().get(1).setY(600);
-
         for (Fourmi f: model.getCurrentPlayer().getListeFourmi()) {
             f.imageFourmi.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -68,10 +61,6 @@ public class ControllerParty {
                 }
             });
         }
-        viewParty.p.getChildren().add(model.getCurrentPlayer().getListeFourmi().get(0).imageFourmi);
-        System.out.println(model.listeJoueurs);
-       // viewParty.p.getChildren().add(model.listeJoueurs.get(2).getListeFourmi().get(1).imageFourmi);
-
     }
 
     public void changerVueTerrierPlateau() {
@@ -79,52 +68,75 @@ public class ControllerParty {
             viewParty.p.setBackground(new Background(bk_image_terrier));
             viewParty.p.getChildren().remove(viewParty.rectangle_objectif);
             viewParty.p.getChildren().remove(viewParty.liste_objectif);
+            for (Fourmi f : model.getListeFourmisPlateau()) {
+                viewParty.p.getChildren().remove(f.imageFourmi);
+            }
+            for (Fourmi f : model.getCurrentPlayer().getListFourmiTerrier()) {
+                viewParty.p.getChildren().add(f.imageFourmi);
+            }
+
+            surPlateau = false;
         } else {
             viewParty.p.setBackground(new Background(bk_image_plateau));
             viewParty.p.getChildren().add(viewParty.rectangle_objectif);
             viewParty.p.getChildren().add(viewParty.liste_objectif);
+            for (Fourmi f : model.getCurrentPlayer().getListFourmiTerrier()) {
+                viewParty.p.getChildren().remove(f.imageFourmi);
+            }
+            for (Fourmi f : model.getListeFourmisPlateau()) {
+                viewParty.p.getChildren().add(f.imageFourmi);
+            }
+            surPlateau = true;
+
         }
     }
 
     public void deplacer_fourmi(MouseEvent event) {
-        System.out.println(fourmiClique);
         // condition qui veut dire que si aucune fourmi n'a été sélectionner ou si on en séléctionné une mais qu'on reclique dessus il ne se passe rien
-        if ((fourmiClique != null) && !((event.getX()>fourmiClique.imageFourmi.getX() && event.getX()<fourmiClique.imageFourmi.getX()+25) && (event.getY()>fourmiClique.imageFourmi.getY() && event.getY()<fourmiClique.imageFourmi.getY()+25)) ) {
-            for (Tuile r : model.getListeRessourcesDispo()) {
-                //on regarde si notre clique est sur l'une des tuiles disponible
-                if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                        //on regarde si le clique est à trois tuiles max de la fourmi
-                        if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            mouvement_fourmi(r);
-                            System.out.println("0");
+        if ((fourmiClique != null) && !((event.getX() > fourmiClique.imageFourmi.getX() && event.getX() < fourmiClique.imageFourmi.getX() + 25) && (event.getY() > fourmiClique.imageFourmi.getY() && event.getY() < fourmiClique.imageFourmi.getY() + 25))) {
+            if (surPlateau) {
+                for (Tuile r : model.getListeRessourcesDispo()) {
+                    //on regarde si notre clique est sur l'une des tuiles disponible
+                    if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
+                        if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
+                            //on regarde si le clique est à trois tuiles max de la fourmi
+                            if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                                mouvement_fourmi(r);
+                                System.out.println("0");
+                            }
+                        } else if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
+                            //on regarde si le clique est à trois tuiles max de la fourmi
+                            if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                                mouvement_fourmi(r);
+                                System.out.println("1");
+                            }
+                        } else if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
+                            //on regarde si le clique est à trois tuiles max de la fourmi
+                            if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                                mouvement_fourmi(r);
+                                System.out.println("2");
+                            }
+                        } else if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
+                            //on regarde si le clique est à trois tuiles max de la fourmi
+                            if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                                mouvement_fourmi(r);
+                                System.out.println("3");
+                            }
                         }
                     }
-                    else if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
-                        //on regarde si le clique est à trois tuiles max de la fourmi
-                        if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            mouvement_fourmi(r);
-                            System.out.println("1");
-                        }
-                    }
-                    else if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
-                        //on regarde si le clique est à trois tuiles max de la fourmi
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            mouvement_fourmi(r);
-                            System.out.println("2");
-                        }
-                    }
-                    else if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                        //on regarde si le clique est à trois tuiles max de la fourmi
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            mouvement_fourmi(r);
-                            System.out.println("3");
-                        }
-                    }
+                }
+            } else {
+                System.out.println(event.getX()+" , "+event.getY());
+                if (Math.pow(event.getX() - 288, 2) + (Math.pow(event.getY() - 42, 2)) < Math.pow(20, 2)) {
+                    fourmiClique.setX(451);
+                    fourmiClique.setY(646);
+                    viewParty.p.getChildren().remove(fourmiClique.imageFourmi);
+                    model.getCurrentPlayer().getListFourmiTerrier().remove(fourmiClique);
+                    model.getListeFourmisPlateau().add(fourmiClique);
 
+                    changerVueTerrierPlateau();
                 }
             }
-
         }
     }
 
@@ -136,11 +148,10 @@ public class ControllerParty {
             viewParty.p.getChildren().remove(t.surbrillance);
         }
         fourmiClique = null;
-
     }
 
     private void selectionFourmi(MouseEvent event, Fourmi f){
-        {
+        if (surPlateau) {
             for (Tuile r : model.getListeRessourcesDispo()) {
                 viewParty.p.getChildren().remove(r.surbrillance);
             }
@@ -167,13 +178,12 @@ public class ControllerParty {
                             viewParty.p.getChildren().add(r.surbrillance);
                         }
                     }
-
                 }
             }
+        }else {
+            fourmiClique = f;
         }
-
     }
-
 }
 
 
