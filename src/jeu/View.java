@@ -18,7 +18,7 @@ public class View {
 
     public Scene getScene() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
-        return new Scene(root, 600, 400);
+        return new Scene(root, 630, 585);
     }
 }
 

@@ -34,8 +34,8 @@ public class ControllerParty {
 
     void lancer_parti() {
         viewParty.p.getChildren().clear();
-        viewParty.p.getScene().getWindow().setWidth(1143);
-        viewParty.p.getScene().getWindow().setHeight(800);
+        viewParty.p.getScene().getWindow().setWidth(1147);
+        viewParty.p.getScene().getWindow().setHeight(836);
         viewParty.p.setBackground(new Background(bk_image_plateau));
 
         viewParty.ajoutAttribut();
@@ -47,7 +47,7 @@ public class ControllerParty {
 
         viewParty.liste_objectif = new Label("Objectif : \n");
         for (Objectif o : model.getCurrentPlayer().getListeObjectif()) {
-            viewParty.liste_objectif.setText(viewParty.liste_objectif.getText() + o + "\n \n");
+            viewParty.liste_objectif.setText(viewParty.liste_objectif.getText() + o + "\n");
         }
         viewParty.positionnerXY(viewParty.liste_objectif, 40, 50);
         viewParty.p.getChildren().add(viewParty.liste_objectif);

@@ -4,12 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,9 +33,6 @@ public class ControllerMenu implements EventHandler {
     private static int joueurEnSelection =0;
 
     public Pane paneMenu;
-    public Button btn_play;
-    public Button btn_rules;
-    public Button btn_option;
     public Button btn_quit;
     public Button btn_retour;
     public Button btn_deux_joueurs;
@@ -74,6 +73,10 @@ public class ControllerMenu implements EventHandler {
     public Label cpt_fourmi_fermiere;
     public Label cpt_fourmi_total;
     public Label cpt_objectif_total;
+    public ImageView btnImageRules;
+    public ImageView btnImageJouer;
+    public ImageView btnImageOption;
+    public ImageView btnImagesQuitter;
 
     private int nbr_objectif_total = 0;
     private int nbr_fourmi_total = 0;
@@ -95,31 +98,65 @@ public class ControllerMenu implements EventHandler {
     }
 
 
-    public void pressButtonMenu(ActionEvent actionEvent) throws IOException {
+    public void pressButtonMenu(MouseEvent actionEvent) throws IOException {
 
-        if (actionEvent.getSource() == btn_play) {
-            changeScene("Menu/SetupGame.fxml", btn_play);
+        if (actionEvent.getSource() == btnImageJouer) {
+            changeScene("Menu/SetupGame.fxml", btnImageJouer);
         }
 
-        if (actionEvent.getSource() == btn_rules) {
-            changeScene("Menu/Rules.fxml", btn_play);
+        if (actionEvent.getSource() == btnImageRules) {
+            changeScene("Menu/Rules.fxml", btnImageRules);
         }
 
-        if (actionEvent.getSource() == btn_option) {
-            changeScene("Menu/Options.fxml", btn_option);
+        if (actionEvent.getSource() == btnImageOption) {
+            changeScene("Menu/Options.fxml", btnImageOption);
         }
 
-        if (actionEvent.getSource() == btn_quit) {
-            Stage stage = (Stage) btn_quit.getScene().getWindow();
+        if (actionEvent.getSource() == btnImagesQuitter) {
+            Stage stage = (Stage) btnImagesQuitter.getScene().getWindow();
             stage.close();
         }
+    }
 
-        if (actionEvent.getSource() == btn_retour) {
-            changeScene("Menu/Menu.fxml", btn_retour);
+    public void onMouseOver(MouseEvent mouseEvent){
+        if (mouseEvent.getSource() == btnImageJouer){
+            btnImageJouer.setImage(new Image("Image_Boutons/Bouton_Jouer_Mouse.png"));
+            btnImageJouer.setY(btnImageJouer.getY()+2);
         }
+        if (mouseEvent.getSource() == btnImageRules){
+            btnImageRules.setImage(new Image("Image_Boutons/Bouton_Regles_Mouse.png"));
+            btnImageRules.setY(btnImageRules.getY()+2);
+        }
+        if (mouseEvent.getSource() == btnImageOption){
+            btnImageOption.setImage(new Image("Image_Boutons/Bouton_Param_Mouse.png"));
+            btnImageOption.setY(btnImageOption.getY()+2);
+        }
+        if (mouseEvent.getSource() == btnImagesQuitter){
+            btnImagesQuitter.setImage(new Image("Image_Boutons/Bouton_Quitter_Mouse.png"));
+            btnImagesQuitter.setY(btnImagesQuitter.getY()+2);
+        }
+    }
+    public  void onMouseExit(MouseEvent mouseEvent){
+        if (mouseEvent.getSource() == btnImageJouer){
+            btnImageJouer.setImage(new Image("Image_Boutons/Bouton_Jouer.png"));
+            btnImageJouer.setY(btnImageJouer.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImageRules){
+            btnImageRules.setImage(new Image("Image_Boutons/Bouton_Regles.png"));
+            btnImageRules.setY(btnImageRules.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImageOption){
+            btnImageOption.setImage(new Image("Image_Boutons/Bouton_Param.png"));
+            btnImageOption.setY(btnImageOption.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImagesQuitter){
+            btnImagesQuitter.setImage(new Image("Image_Boutons/Bouton_Quitter.png"));
+            btnImagesQuitter.setY(btnImagesQuitter.getY()-2);
+        }
+    }
 
         //////////////////////// Selection nombres de joueurs ////////////////////////////////////////////////////
-    }
+
     public void pressButtonSelectbJoueurs(ActionEvent actionEvent) throws IOException {
 
         if (actionEvent.getSource() == btn_deux_joueurs){
@@ -268,11 +305,12 @@ public class ControllerMenu implements EventHandler {
                     joueur.getListeObjectif().add(new ObjectifFermier());
 
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_chasseuse.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiChasseuse(new Image("jeu/Images/fourmi.png")));
+                    joueur.getListeFourmi().add(new FourmiChasseuse(new Image("Image_fourmi/Chasseuse_Rouge.png")));
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_creuseuse.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiCreuseuse(new Image("jeu/Images/fourmi.png")));
+
+                    joueur.getListeFourmi().add(new FourmiCreuseuse(new Image("Image_fourmi/Creuseuse_Rouge.png")));
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_fermiere.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiFermiere(new Image("jeu/Images/fourmi.png")));
+                    joueur.getListeFourmi().add(new FourmiFermiere(new Image("Image_fourmi/Fermiere_Rouge.png")));
                 joueurEnSelection++;
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/SelectionFourmi/ChoixFourmiObjectif.fxml"));
@@ -293,9 +331,9 @@ public class ControllerMenu implements EventHandler {
     }
 
 
-        private void changeScene(String url, Button bouton) throws IOException {
+        private void changeScene(String url, Node node) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(url));
-        bouton.getScene().setRoot(root);
+        node.getScene().setRoot(root);
     }
         private void incrementercompteur(Label cpt){
             int nbr_actu = 0;

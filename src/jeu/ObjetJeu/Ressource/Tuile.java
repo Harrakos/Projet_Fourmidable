@@ -15,13 +15,13 @@ public class Tuile {
     public Tuile() {
         this.rayon = 21;
         tuileRessource = true;
-        Image surbrillanceI = new Image("Image_Tuile/Surbrillance.png");
+        Image surbrillanceI = new Image("Image_Tuile/SB.png");
         this.surbrillance = new ImageView(surbrillanceI);
     }
 
     public Tuile(boolean tuileRessource){
         this.tuileRessource = false;
-        Image surbrillanceI = new Image("Image_Tuile/Surbrillance.png");
+        Image surbrillanceI = new Image("Image_Tuile/SB.png");
         this.surbrillance = new ImageView(surbrillanceI);    }
 
 
