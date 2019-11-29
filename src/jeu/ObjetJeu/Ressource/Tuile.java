@@ -30,7 +30,7 @@ public class Tuile {
         this.posY = posY;
         this.rayon = 21;
         tuileRessource = true;
-        Image surbrillanceI = new Image("Image_Tuile/Surbrillance.png");
+        Image surbrillanceI = new Image("Image_Tuile/SB.png");
         this.surbrillance = new ImageView(surbrillanceI);
     }
 

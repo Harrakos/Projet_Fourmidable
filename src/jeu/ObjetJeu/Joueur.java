@@ -13,6 +13,7 @@ public class Joueur {
     private ArrayList<Objectif> listeObjectif;
     private ArrayList<Fourmi> listeFourmi;
     private ArrayList<Tuile> listeRessource;
+    private ArrayList<Fourmi> listFourmiTerrier;
 
     public Joueur(String pseudo, Color couleur) {
         this.pseudo = pseudo;
@@ -20,12 +21,9 @@ public class Joueur {
         listeObjectif = new ArrayList<>();
         listeFourmi = new ArrayList<>();
         listeRessource = new ArrayList<>();
+        listFourmiTerrier = new ArrayList<>();
    }
-
-
-
    /// Getter and Setter //////////////
-
 
     public ArrayList<Objectif> getListeObjectif() {
         return listeObjectif;
@@ -49,6 +47,14 @@ public class Joueur {
 
     public void setListeRessource(ArrayList<Tuile> listeTuile) {
         this.listeRessource = listeTuile;
+    }
+
+    public ArrayList<Fourmi> getListFourmiTerrier() {
+        return listFourmiTerrier;
+    }
+
+    public void setListFourmiTerrier(ArrayList<Fourmi> listFourmiTerrier) {
+        this.listFourmiTerrier = listFourmiTerrier;
     }
 
     public String getPseudo() {

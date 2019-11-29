@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jeu.ObjetJeu.*;
+import jeu.ObjetJeu.Fourmi.Fourmi;
 import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import jeu.ObjetJeu.Fourmi.FourmiCreuseuse;
 import jeu.ObjetJeu.Fourmi.FourmiFermiere;
@@ -31,6 +32,7 @@ public class ControllerMenu implements EventHandler {
     private static Model model;
     private static View view;
     private static int joueurEnSelection =0;
+    private Fourmi fourmi;
 
     public Pane paneMenu;
     public Button btn_quit;
@@ -248,47 +250,47 @@ public class ControllerMenu implements EventHandler {
 
         if (mouseEvent.getSource() == btn_fourmi_chasseuse){
             if (mouseEvent.getButton() == MouseButton.PRIMARY){
-                if (nbr_fourmi_total<6) {
+                if (nbr_fourmi_total<3) {
                     nbr_fourmi_total++;
                     incrementercompteur(cpt_fourmi_chasseuse);
-                    cpt_fourmi_total.setText(nbr_fourmi_total + "/6");
+                    cpt_fourmi_total.setText(nbr_fourmi_total + "/3");
                 }
             }else if (mouseEvent.getButton() == MouseButton.SECONDARY){
                 if (nbr_fourmi_total>0 && !cpt_fourmi_chasseuse.getText().equals("0")){
                     nbr_fourmi_total--;
                     decrementer(cpt_fourmi_chasseuse);
-                    cpt_fourmi_total.setText(nbr_fourmi_total + "/6");
+                    cpt_fourmi_total.setText(nbr_fourmi_total + "/3");
                 }
             }
 
         }
         if (mouseEvent.getSource() == btn_fourmi_creuseuse){
             if (mouseEvent.getButton() == MouseButton.PRIMARY){
-                if (nbr_fourmi_total<6) {
+                if (nbr_fourmi_total<3) {
                     nbr_fourmi_total++;
                     incrementercompteur(cpt_fourmi_creuseuse);
-                    cpt_fourmi_total.setText(nbr_fourmi_total + "/6");
+                    cpt_fourmi_total.setText(nbr_fourmi_total + "/3");
                 }
             }else if (mouseEvent.getButton() == MouseButton.SECONDARY){
                 if (nbr_fourmi_total>0 && !cpt_fourmi_creuseuse.getText().equals("0")){
                     nbr_fourmi_total--;
                     decrementer(cpt_fourmi_creuseuse);
-                    cpt_fourmi_total.setText(nbr_fourmi_total + "/6");
+                    cpt_fourmi_total.setText(nbr_fourmi_total + "/3");
                 }
             }
         }
         if (mouseEvent.getSource() == btn_fourmi_fermiere){
             if (mouseEvent.getButton() == MouseButton.PRIMARY){
-                if (nbr_fourmi_total<6) {
+                if (nbr_fourmi_total<3) {
                     nbr_fourmi_total++;
                     incrementercompteur(cpt_fourmi_fermiere);
-                    cpt_fourmi_total.setText(nbr_fourmi_total + "/6");
+                    cpt_fourmi_total.setText(nbr_fourmi_total + "/3");
                 }
             }else if (mouseEvent.getButton() == MouseButton.SECONDARY){
                 if (nbr_fourmi_total>0 && !cpt_fourmi_fermiere.getText().equals("0")){
                     nbr_fourmi_total--;
                     decrementer(cpt_fourmi_fermiere);
-                    cpt_fourmi_total.setText(nbr_fourmi_total + "/6");
+                    cpt_fourmi_total.setText(nbr_fourmi_total + "/3");
                 }
             }
         }
@@ -304,15 +306,26 @@ public class ControllerMenu implements EventHandler {
                 for (int i = 0; i < Integer.parseInt(cpt_objectif_fermier.getText()); i++)
                     joueur.getListeObjectif().add(new ObjectifFermier());
 
-                for (int i = 0; i < Integer.parseInt(cpt_fourmi_chasseuse.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiChasseuse(new Image("Image_fourmi/Chasseuse_Rouge.png")));
-                for (int i = 0; i < Integer.parseInt(cpt_fourmi_creuseuse.getText()); i++)
-
-                    joueur.getListeFourmi().add(new FourmiCreuseuse(new Image("Image_fourmi/Creuseuse_Rouge.png")));
-                for (int i = 0; i < Integer.parseInt(cpt_fourmi_fermiere.getText()); i++)
-                    joueur.getListeFourmi().add(new FourmiFermiere(new Image("Image_fourmi/Fermiere_Rouge.png")));
+                for (int i = 0; i < Integer.parseInt(cpt_fourmi_chasseuse.getText()); i++){
+                    fourmi = new FourmiChasseuse(new Image("jeu/Images/fourmi.png"));
+                    joueur.getListeFourmi().add(fourmi);
+                    joueur.getListFourmiTerrier().add(fourmi);
+                }
+                for (int i = 0; i < Integer.parseInt(cpt_fourmi_creuseuse.getText()); i++){
+                    fourmi = new FourmiCreuseuse(new Image("jeu/Images/fourmi.png"));
+                    joueur.getListeFourmi().add(fourmi);
+                    joueur.getListFourmiTerrier().add(fourmi);
+                }
+                for (int i = 0; i < Integer.parseInt(cpt_fourmi_fermiere.getText()); i++){
+                    fourmi = new FourmiFermiere(new Image("jeu/Images/fourmi.png"));
+                    joueur.getListeFourmi().add(fourmi);
+                    joueur.getListFourmiTerrier().add(fourmi);
+                }
+                for (int i =0; i<3; i++){
+                    model.listeJoueurs.get(joueurEnSelection).getListeFourmi().get(i).setX(287);
+                    model.listeJoueurs.get(joueurEnSelection).getListeFourmi().get(i).setY(84+40*i);
+                }
                 joueurEnSelection++;
-
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/SelectionFourmi/ChoixFourmiObjectif.fxml"));
                 btn_suivant.getScene().setRoot(loader.load());
                 ControllerMenu controllerMenu = loader.getController();
