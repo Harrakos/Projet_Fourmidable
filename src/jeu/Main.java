@@ -16,7 +16,6 @@ public class Main extends Application {
         Model model = new Model();
         View view = new View(model);
         new Controller(view,model).start();
-
         primaryStage.setTitle("Fourmidable");
         primaryStage.setScene(view.getScene());
         primaryStage.setResizable(false);

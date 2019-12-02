@@ -22,6 +22,8 @@ public class Model {
     private Joueur currentPlayer;
     private ArrayList<Tuile> listeRessourcesDispo;
     private ArrayList<Fourmi> listeFourmisPlateau;
+    private ArrayList<Fourmi> listeInsectesDejaJoue;
+    private ArrayList<Fourmi> listeInsectesPasEncoreJoue;
 
 
     public Model(){
@@ -30,6 +32,9 @@ public class Model {
         listeFourmisPlateau = new ArrayList<>();
         remplissagelisteRessourcesDispo();
         pm = 3;
+        listeInsectesDejaJoue = new ArrayList<>();
+        listeInsectesPasEncoreJoue = new ArrayList<>();
+
     }
 
     public int getNbreJoueurs() {
@@ -45,7 +50,11 @@ public class Model {
     }
 
     public void setCurrentPlayer(Joueur currentPlayer) {
-        this.currentPlayer = currentPlayer;
+        if (currentPlayer == null) {
+            this.currentPlayer = listeJoueurs.get(0);
+        } else {
+            this.currentPlayer = currentPlayer;
+        }
     }
 
     public ArrayList<Tuile> getListeRessourcesDispo() {
@@ -69,6 +78,22 @@ public class Model {
 
     public void setPm(int pm) {
         this.pm = pm;
+    }
+
+    public ArrayList<Fourmi> getListeInsectesDejaJoue() {
+        return listeInsectesDejaJoue;
+    }
+
+    public void setListeInsectesDejaJoue(ArrayList<Fourmi> listeInsectesDejaJoue) {
+        this.listeInsectesDejaJoue = listeInsectesDejaJoue;
+    }
+
+    public ArrayList<Fourmi> getListeInsectesPasEncoreJoue() {
+        return listeInsectesPasEncoreJoue;
+    }
+
+    public void setListeInsectesPasEncoreJoue(ArrayList<Fourmi> listeInsectesPasEncoreJoue) {
+        this.listeInsectesPasEncoreJoue = listeInsectesPasEncoreJoue;
     }
 
     private void remplissagelisteRessourcesDispo(){
@@ -109,11 +134,6 @@ public class Model {
         i = remplissageLigne(4,413,580,tabTuile,i);
         i = remplissageLigne(3, 413, 624, tabTuile,i);
 
-        //Tuile a  = new TuileMyrtille();
-        //a.setPosX(490);
-        //a.setPosY(669);
-        //listeRessourcesDispo.add(a);
-        //listeRessourcesDispo.add(new Tuile(649,130));
 
     }
 

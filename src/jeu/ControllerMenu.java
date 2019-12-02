@@ -32,8 +32,7 @@ public class ControllerMenu implements EventHandler {
     private static Model model;
     private static View view;
     private static int joueurEnSelection =0;
-    private Fourmi fourmi;
-
+    private static int[][] posTerrier = {{451,646},{687,153},{725,625},{413,175},{842,377},{296,421}};
     public Pane paneMenu;
     public Button btn_quit;
     public Button btn_retour;
@@ -43,14 +42,12 @@ public class ControllerMenu implements EventHandler {
     public Button btn_cinq_joueurs;
     public Button btn_six_joueurs;
     public Button btn_launch_game;
-
     public TextField label_joueur1;
     public TextField label_joueur2;
     public TextField label_joueur3;
     public TextField label_joueur4;
     public TextField label_joueur5;
     public TextField label_joueur6;
-
     public ColorPicker color_picker1;
     public ColorPicker color_picker2;
     public ColorPicker color_picker3;
@@ -58,7 +55,6 @@ public class ControllerMenu implements EventHandler {
     public ColorPicker color_picker5;
     public ColorPicker color_picker6;
     public Label pseudo;
-
     public Button btn_objectif_chasse;
     public Button btn_objectif_creuser;
     public Button btn_objectif_fermier;
@@ -66,7 +62,6 @@ public class ControllerMenu implements EventHandler {
     public Button btn_fourmi_creuseuse;
     public Button btn_fourmi_fermiere;
     public Button btn_suivant;
-
     public Label cpt_objectif_chasse;
     public Label cpt_objectif_creuseur;
     public Label cpt_objectif_fermier;
@@ -79,26 +74,24 @@ public class ControllerMenu implements EventHandler {
     public ImageView btnImageJouer;
     public ImageView btnImageOption;
     public ImageView btnImagesQuitter;
-
+    private Fourmi fourmi;
     private int nbr_objectif_total = 0;
     private int nbr_fourmi_total = 0;
 
 
-    void initialize(){}
-
-
-    private void initData(String c_pseudo){
-        pseudo.setText(c_pseudo);
-    }
-
-
     public ControllerMenu(){}
+
 
     public ControllerMenu(Model model, View view ) {
         ControllerMenu.view = view;
         ControllerMenu.model = model;
     }
 
+    void initialize(){}
+
+    private void initData(String c_pseudo){
+        pseudo.setText(c_pseudo);
+    }
 
     public void pressButtonMenu(MouseEvent actionEvent) throws IOException {
 
@@ -190,7 +183,6 @@ public class ControllerMenu implements EventHandler {
             ColorPicker[] tabColor = {color_picker1,color_picker2,color_picker3,color_picker4,color_picker5,color_picker6};
             for (int i = 0; i< model.getNbreJoueurs(); i++){
                 model.listeJoueurs.add(new Joueur(tabPseudo[i].getText(),tabColor[i].getValue()));
-                System.out.println(model.listeJoueurs.get(i).getPseudo() + model.listeJoueurs.get(i).getCouleur());
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/SelectionFourmi/ChoixFourmiObjectif.fxml"));
             btn_launch_game.getScene().setRoot(loader.load());
@@ -294,10 +286,8 @@ public class ControllerMenu implements EventHandler {
                 }
             }
         }
-
+        Joueur joueur;
         if (mouseEvent.getSource() == btn_suivant){
-            if (joueurEnSelection<model.getNbreJoueurs()-1){
-                Joueur joueur;
                 joueur = model.listeJoueurs.get(joueurEnSelection);
                 for (int i = 0; i < Integer.parseInt(cpt_objectif_chasse.getText()); i++)
                     joueur.getListeObjectif().add(new ObjectifChasse());
@@ -307,25 +297,30 @@ public class ControllerMenu implements EventHandler {
                     joueur.getListeObjectif().add(new ObjectifFermier());
 
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_chasseuse.getText()); i++){
-                    fourmi = new FourmiChasseuse(new Image("jeu/Images/fourmi.png"));
+                    fourmi = new FourmiChasseuse(new Image("Images_fourmi/"+joueurEnSelection+"_Chasseuse.png"));
                     joueur.getListeFourmi().add(fourmi);
                     joueur.getListFourmiTerrier().add(fourmi);
+                    model.getListeInsectesPasEncoreJoue().add(fourmi);
                 }
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_creuseuse.getText()); i++){
-                    fourmi = new FourmiCreuseuse(new Image("jeu/Images/fourmi.png"));
+                    fourmi = new FourmiCreuseuse(new Image("Images_fourmi/"+joueurEnSelection+"_Creuseuse.png"));
                     joueur.getListeFourmi().add(fourmi);
                     joueur.getListFourmiTerrier().add(fourmi);
+                    model.getListeInsectesPasEncoreJoue().add(fourmi);
                 }
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_fermiere.getText()); i++){
-                    fourmi = new FourmiFermiere(new Image("jeu/Images/fourmi.png"));
+                    fourmi = new FourmiFermiere(new Image("Images_fourmi/"+joueurEnSelection+"_Fermiere.png"));
                     joueur.getListeFourmi().add(fourmi);
                     joueur.getListFourmiTerrier().add(fourmi);
+                    model.getListeInsectesPasEncoreJoue().add(fourmi);
                 }
                 for (int i =0; i<3; i++){
                     model.listeJoueurs.get(joueurEnSelection).getListeFourmi().get(i).setX(287);
                     model.listeJoueurs.get(joueurEnSelection).getListeFourmi().get(i).setY(84+40*i);
                 }
-                joueurEnSelection++;
+                joueur.setPositionTerrierJoueur(posTerrier[joueurEnSelection]);
+            joueurEnSelection++;
+            if (joueurEnSelection-1<model.getNbreJoueurs()-1){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/SelectionFourmi/ChoixFourmiObjectif.fxml"));
                 btn_suivant.getScene().setRoot(loader.load());
                 ControllerMenu controllerMenu = loader.getController();
@@ -336,11 +331,6 @@ public class ControllerMenu implements EventHandler {
 
 
         }
-
-
-
-
-
     }
 
 

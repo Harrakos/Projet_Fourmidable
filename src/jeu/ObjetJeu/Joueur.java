@@ -14,6 +14,7 @@ public class Joueur {
     private ArrayList<Fourmi> listeFourmi;
     private ArrayList<Tuile> listeRessource;
     private ArrayList<Fourmi> listFourmiTerrier;
+    private int[] positionTerrierJoueur;
 
     public Joueur(String pseudo, Color couleur) {
         this.pseudo = pseudo;
@@ -22,6 +23,7 @@ public class Joueur {
         listeFourmi = new ArrayList<>();
         listeRessource = new ArrayList<>();
         listFourmiTerrier = new ArrayList<>();
+        positionTerrierJoueur = new int[2];
    }
    /// Getter and Setter //////////////
 
@@ -55,6 +57,14 @@ public class Joueur {
 
     public void setListFourmiTerrier(ArrayList<Fourmi> listFourmiTerrier) {
         this.listFourmiTerrier = listFourmiTerrier;
+    }
+
+    public int[] getPositionTerrierJoueur() {
+        return positionTerrierJoueur;
+    }
+
+    public void setPositionTerrierJoueur(int[] positionTerrierJoueur) {
+        this.positionTerrierJoueur = positionTerrierJoueur;
     }
 
     public String getPseudo() {
