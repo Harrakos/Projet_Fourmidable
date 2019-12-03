@@ -16,11 +16,11 @@ public class ObjectifChasse extends Objectif {
             chenilleMax = (int)(Math.random() * 3);
         }
         if (scarabeMax != 0)
-            message = message+"Scarabe : "+scarabeActu+"/"+scarabeMax+"\n";
+            message = message+" Scarabe : "+scarabeActu+"/"+scarabeMax+"\n";
         if (coccinelleMax != 0)
-            message = message+"Coccinelle :  "+coccinelleActu+"/"+coccinelleMax+"\n";
+            message = message+" Coccinelle :  "+coccinelleActu+"/"+coccinelleMax+"\n";
         if (chenilleMax != 0)
-            message = message+"Chenille : "+coccinelleActu+"/"+coccinelleMax+"\n";
+            message = message+" Chenille : "+coccinelleActu+"/"+coccinelleMax+"\n";
 
 
 

@@ -121,21 +121,25 @@ public class ControllerParty {
                                 //on regarde si le clique est à trois tuiles max de la fourmi
                                 if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
                                     mouvement_fourmi(r);
+                                    passerTour();
                                 }
                             } else if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
                                 //on regarde si le clique est à trois tuiles max de la fourmi
                                 if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
                                     mouvement_fourmi(r);
+                                    passerTour();
                                 }
                             } else if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
                                 //on regarde si le clique est à trois tuiles max de la fourmi
                                 if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
                                     mouvement_fourmi(r);
+                                    passerTour();
                                 }
                             } else if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
                                 //on regarde si le clique est à trois tuiles max de la fourmi
                                 if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
                                     mouvement_fourmi(r);
+                                    passerTour();
                                 }
                             }
                         }
@@ -160,11 +164,51 @@ public class ControllerParty {
         // ajout de la tuile dans la liste ressource du joueur si personne n'est déjà passé dessus
         if (r.isTuileRessource()) {
             r.setNomDuPossedeur(model.getCurrentPlayer().getPseudo());
-            model.getCurrentPlayer().getListeRessource().add(r);
-            r.setTuileRessource(false);
-            viewParty.p.getChildren().add(r.pheromone);
-            System.out.println(r);
+            if (fourmiClique.recupere(r)) {
+                model.getCurrentPlayer().getListeRessource().add(r);
+                r.setTuileRessource(false);
+                viewParty.p.getChildren().add(r.pheromone);
+                System.out.println(r);
+                System.out.println(model.getCurrentPlayer().getListeRessource());
+            }
         }
+    }
+
+    private void selectionFourmi(MouseEvent event, Fourmi f){
+        if (surPlateau) {
+            for (Tuile r : model.getListeRessourcesDispo()) {
+                viewParty.p.getChildren().remove(r.surbrillance);
+            }
+            fourmiClique = f;
+            for (Tuile r : model.getListeRessourcesDispo() ) {
+                if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
+                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
+                        if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                            viewParty.p.getChildren().add(r.surbrillance);
+                        }
+                    }
+                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
+                        if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                            viewParty.p.getChildren().add(r.surbrillance);
+                        }
+                    }
+                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
+                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                            viewParty.p.getChildren().add(r.surbrillance);
+                        }
+                    }
+                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
+                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
+                            viewParty.p.getChildren().add(r.surbrillance);
+                        }
+                    }
+                }
+            }
+        }else {
+            fourmiClique = f;
+        }
+    }
+    private void passerTour(){
         //enelèvement de la surbrillance
         for (Tuile t : model.getListeRessourcesDispo()) {
             viewParty.p.getChildren().remove(t.surbrillance);
@@ -213,44 +257,6 @@ public class ControllerParty {
                 }
             }
         }
-
-    }
-
-    private void selectionFourmi(MouseEvent event, Fourmi f){
-        if (surPlateau) {
-            for (Tuile r : model.getListeRessourcesDispo()) {
-                viewParty.p.getChildren().remove(r.surbrillance);
-            }
-            fourmiClique = f;
-            for (Tuile r : model.getListeRessourcesDispo() ) {
-                if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
-                        if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
-                        if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                }
-            }
-        }else {
-            fourmiClique = f;
-        }
-    }
-    private void passerTour(){
 
     }
 }

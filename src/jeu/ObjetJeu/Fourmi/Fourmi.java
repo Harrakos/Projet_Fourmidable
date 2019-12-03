@@ -2,6 +2,7 @@ package jeu.ObjetJeu.Fourmi;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import jeu.ObjetJeu.Ressource.Tuile;
 
 public class Fourmi {
     public ImageView imageFourmi;
@@ -31,5 +32,9 @@ public class Fourmi {
     @Override
     public String toString() {
         return "Fourmi{}";
+    }
+
+    public boolean recupere(Tuile r) {
+        return false;
     }
 }

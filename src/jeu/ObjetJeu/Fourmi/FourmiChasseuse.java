@@ -1,7 +1,8 @@
 package jeu.ObjetJeu.Fourmi;
 
 import javafx.scene.image.Image;
-import jeu.ObjetJeu.Fourmi.Fourmi;
+import jeu.ObjetJeu.Ressource.RessourceChasse.TuileChasse;
+import jeu.ObjetJeu.Ressource.Tuile;
 
 public class FourmiChasseuse extends Fourmi {
 
@@ -13,5 +14,13 @@ public class FourmiChasseuse extends Fourmi {
     @Override
     public String toString() {
         return "FourmiChasseuse{}";
+    }
+
+    public boolean recupere(Tuile r){
+        if (r instanceof TuileChasse){
+            return true;
+        }else {
+            return false;
+        }
     }
 }
