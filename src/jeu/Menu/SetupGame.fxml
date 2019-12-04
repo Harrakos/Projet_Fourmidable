@@ -1,48 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.ControllerMenu">
+<AnchorPane prefHeight="585.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.ControllerMenu">
    <children>
-      <Label layoutX="211.0" layoutY="38.0" text="Choix nombre Joueurs">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <Button fx:id="btn_deux_joueurs" mnemonicParsing="false" onAction="#pressButtonSelectbJoueurs" text="2 joueurs">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btn_trois_joueurs" mnemonicParsing="false" onAction="#pressButtonSelectbJoueurs" text="3 joueurs">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btn_quatre_joueurs" mnemonicParsing="false" onAction="#pressButtonSelectbJoueurs" text="4 joueurs">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btn_cinq_joueurs" mnemonicParsing="false" onAction="#pressButtonSelectbJoueurs" text="5 joueurs">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btn_six_joueurs" mnemonicParsing="false" onAction="#pressButtonSelectbJoueurs" text="6 joueurs">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <Button fx:id="btn_retour" layoutX="274.0" layoutY="327.0" mnemonicParsing="false" onAction="#pressButtonMenu" text="retour" />
+      <ImageView fitHeight="585.0" fitWidth="662.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/menu_ChoixNbJoueurs.png" />
+      </ImageView>
+      <ImageView fx:id="btnImageRetour" fitHeight="39.0" fitWidth="156.0" layoutX="230.0" layoutY="433.0" onMouseClicked="#pressButtonMenu" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/bouton_retour.png" />
+      </ImageView>
+      <ImageView fx:id="btnImageDeuxJoueurs" fitHeight="39.0" fitWidth="119.0" layoutX="254.0" layoutY="137.0" onMouseClicked="#pressButtonSelectbJoueurs" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/bouton_2joueur.png" />
+      </ImageView>
+      <ImageView fx:id="btnImageTroisJoueurs" fitHeight="39.0" fitWidth="100.0" layoutX="254.0" layoutY="194.0" onMouseClicked="#pressButtonSelectbJoueurs" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/bouton_3joueur.png" />
+      </ImageView>
+      <ImageView fx:id="btnImagequatreJoueurs" fitHeight="39.0" fitWidth="93.0" layoutX="254.0" layoutY="254.0" onMouseClicked="#pressButtonSelectbJoueurs" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/bouton_4joueur.png" />
+      </ImageView>
+      <ImageView fx:id="btnImageCinqJoueurs" fitHeight="39.0" fitWidth="93.0" layoutX="254.0" layoutY="310.0" onMouseClicked="#pressButtonSelectbJoueurs" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/bouton_5joueur.png" />
+      </ImageView>
+      <ImageView fx:id="btnImageSixJoueurs" fitHeight="39.0" fitWidth="93.0" layoutX="254.0" layoutY="371.0" onMouseClicked="#pressButtonSelectbJoueurs" onMouseEntered="#onMouseOver" onMouseExited="#onMouseExit" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Image_choix_joueurs/bouton_6joueur.png" />
+      </ImageView>
    </children>
 </AnchorPane>

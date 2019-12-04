@@ -34,13 +34,9 @@ public class ControllerMenu implements EventHandler {
     private static int joueurEnSelection =0;
     private static int[][] posTerrier = {{451,646},{687,153},{725,625},{413,175},{842,377},{296,421}};
     public Pane paneMenu;
-    public Button btn_quit;
+
     public Button btn_retour;
-    public Button btn_deux_joueurs;
-    public Button btn_trois_joueurs;
-    public Button btn_quatre_joueurs;
-    public Button btn_cinq_joueurs;
-    public Button btn_six_joueurs;
+
     public Button btn_launch_game;
     public TextField label_joueur1;
     public TextField label_joueur2;
@@ -74,6 +70,12 @@ public class ControllerMenu implements EventHandler {
     public ImageView btnImageJouer;
     public ImageView btnImageOption;
     public ImageView btnImagesQuitter;
+    public ImageView btnImageRetour;
+    public ImageView btnImageDeuxJoueurs;
+    public ImageView btnImageTroisJoueurs;
+    public ImageView btnImagequatreJoueurs;
+    public ImageView btnImageCinqJoueurs;
+    public ImageView btnImageSixJoueurs;
     private Fourmi fourmi;
     private int nbr_objectif_total = 0;
     private int nbr_fourmi_total = 0;
@@ -111,6 +113,9 @@ public class ControllerMenu implements EventHandler {
             Stage stage = (Stage) btnImagesQuitter.getScene().getWindow();
             stage.close();
         }
+        if (actionEvent.getSource() == btnImageRetour){
+            changeScene("Menu/Menu.fxml",btnImageRetour);
+        }
     }
 
     public void onMouseOver(MouseEvent mouseEvent){
@@ -130,6 +135,22 @@ public class ControllerMenu implements EventHandler {
             btnImagesQuitter.setImage(new Image("Image_Boutons/Bouton_Quitter_Mouse.png"));
             btnImagesQuitter.setY(btnImagesQuitter.getY()+2);
         }
+
+        if (mouseEvent.getSource() == btnImageDeuxJoueurs){
+            btnImageDeuxJoueurs.setY(btnImageDeuxJoueurs.getY()+2);
+        }
+        if (mouseEvent.getSource() == btnImageTroisJoueurs){
+            btnImageTroisJoueurs.setY(btnImageTroisJoueurs.getY()+2);
+        }
+        if (mouseEvent.getSource() == btnImagequatreJoueurs){
+            btnImagequatreJoueurs.setY(btnImagequatreJoueurs.getY()+2);
+        }
+        if (mouseEvent.getSource() == btnImageCinqJoueurs){
+            btnImageCinqJoueurs.setY(btnImageCinqJoueurs.getY()+2);
+        }
+        if (mouseEvent.getSource() == btnImageSixJoueurs){
+            btnImageSixJoueurs.setY(btnImageSixJoueurs.getY()+2);
+        }
     }
     public  void onMouseExit(MouseEvent mouseEvent){
         if (mouseEvent.getSource() == btnImageJouer){
@@ -148,37 +169,53 @@ public class ControllerMenu implements EventHandler {
             btnImagesQuitter.setImage(new Image("Image_Boutons/Bouton_Quitter.png"));
             btnImagesQuitter.setY(btnImagesQuitter.getY()-2);
         }
+
+        if (mouseEvent.getSource() == btnImageDeuxJoueurs){
+            btnImageDeuxJoueurs.setY(btnImageDeuxJoueurs.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImageTroisJoueurs){
+            btnImageTroisJoueurs.setY(btnImageTroisJoueurs.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImagequatreJoueurs){
+            btnImagequatreJoueurs.setY(btnImagequatreJoueurs.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImageCinqJoueurs){
+            btnImageCinqJoueurs.setY(btnImageCinqJoueurs.getY()-2);
+        }
+        if (mouseEvent.getSource() == btnImageSixJoueurs){
+            btnImageSixJoueurs.setY(btnImageSixJoueurs.getY()-2);
+        }
     }
 
         //////////////////////// Selection nombres de joueurs ////////////////////////////////////////////////////
 
-    public void pressButtonSelectbJoueurs(ActionEvent actionEvent) throws IOException {
+    public void pressButtonSelectbJoueurs(MouseEvent mouseEvent) throws IOException {
 
-        if (actionEvent.getSource() == btn_deux_joueurs){
+        if (mouseEvent.getSource() == btnImageDeuxJoueurs){
             model.setNbreJoueurs(2);
-            changeScene("Menu/SelectionFourmi/Deux_joueurs.fxml",btn_deux_joueurs);
+            changeScene("Menu/SelectionFourmi/Deux_joueurs.fxml",btnImageDeuxJoueurs);
         }
 
-        if (actionEvent.getSource() == btn_trois_joueurs){
+        if (mouseEvent.getSource() == btnImageTroisJoueurs){
             model.setNbreJoueurs(3);
-            changeScene("Menu/SelectionFourmi/Trois_joueurs.fxml",btn_trois_joueurs);
+            changeScene("Menu/SelectionFourmi/Trois_joueurs.fxml",btnImageTroisJoueurs);
         }
 
-        if (actionEvent.getSource() == btn_quatre_joueurs){
+        if (mouseEvent.getSource() == btnImagequatreJoueurs){
             model.setNbreJoueurs(4);
-            changeScene("Menu/SelectionFourmi/Quatres_joueurs.fxml",btn_quatre_joueurs);
+            changeScene("Menu/SelectionFourmi/Quatres_joueurs.fxml",btnImagequatreJoueurs);
         }
 
-        if (actionEvent.getSource() == btn_cinq_joueurs){
+        if (mouseEvent.getSource() == btnImageCinqJoueurs){
             model.setNbreJoueurs(5);
-            changeScene("Menu/SelectionFourmi/Cinq_joueurs.fxml",btn_cinq_joueurs);
+            changeScene("Menu/SelectionFourmi/Cinq_joueurs.fxml",btnImageCinqJoueurs);
         }
 
-        if (actionEvent.getSource() == btn_six_joueurs){
+        if (mouseEvent.getSource() == btnImageSixJoueurs){
             model.setNbreJoueurs(6);
-            changeScene("Menu/SelectionFourmi/Six_joueurs.fxml",btn_six_joueurs);
+            changeScene("Menu/SelectionFourmi/Six_joueurs.fxml",btnImageSixJoueurs);
         }
-        if (actionEvent.getSource() == btn_launch_game ){
+        if (mouseEvent.getSource() == btn_launch_game ){
             TextField[] tabPseudo = {label_joueur1,label_joueur2,label_joueur3,label_joueur4,label_joueur5,label_joueur6};
             ColorPicker[] tabColor = {color_picker1,color_picker2,color_picker3,color_picker4,color_picker5,color_picker6};
             for (int i = 0; i< model.getNbreJoueurs(); i++){
@@ -188,6 +225,9 @@ public class ControllerMenu implements EventHandler {
             btn_launch_game.getScene().setRoot(loader.load());
             ControllerMenu controllerMenu = loader.getController();
             controllerMenu.initData(model.listeJoueurs.get(joueurEnSelection).getPseudo());
+        }
+        if (mouseEvent.getSource() == btnImageRetour){
+            changeScene("Menu/Menu.fxml",btnImageRetour);
         }
     }
 
