@@ -12,16 +12,21 @@ public class Joueur {
     private Color couleur;
     private ArrayList<Objectif> listeObjectif;
     private ArrayList<Fourmi> listeFourmi;
-    private ArrayList<Tuile> listeRessource;
+   // private ArrayList<Tuile> listeRessource;
+    private int[] tabNbrRessource;
+
+
     private ArrayList<Fourmi> listFourmiTerrier;
     private int[] positionTerrierJoueur;
 
     public Joueur(String pseudo, Color couleur) {
+
         this.pseudo = pseudo;
         this.couleur = couleur;
         listeObjectif = new ArrayList<>();
         listeFourmi = new ArrayList<>();
-        listeRessource = new ArrayList<>();
+        //listeRessource = new ArrayList<>();
+        tabNbrRessource = new int[] {0,0,0,0,0,0,0,0,0};
         listFourmiTerrier = new ArrayList<>();
         positionTerrierJoueur = new int[2];
    }
@@ -43,13 +48,7 @@ public class Joueur {
         this.listeFourmi = listeFourmi;
     }
 
-    public ArrayList<Tuile> getListeRessource() {
-        return listeRessource;
-    }
 
-    public void setListeRessource(ArrayList<Tuile> listeTuile) {
-        this.listeRessource = listeTuile;
-    }
 
     public ArrayList<Fourmi> getListFourmiTerrier() {
         return listFourmiTerrier;
@@ -73,6 +72,14 @@ public class Joueur {
 
     public Color getCouleur() {
         return couleur;
+    }
+
+    public int[] getTabNbrRessource() {
+        return tabNbrRessource;
+    }
+
+    public void setTabNbrRessource(int[] tabNbrRessource) {
+        this.tabNbrRessource = tabNbrRessource;
     }
 }
 

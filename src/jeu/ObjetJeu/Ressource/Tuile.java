@@ -13,6 +13,23 @@ public class Tuile {
     public ImageView surbrillance;
     public ImageView pheromone;
     private String nomDuPossedeur = "";
+    /*
+    -1 = tuile non cliquable
+
+    0 = Scarabe
+    1 = Coccinelle
+    2 = Chenille
+
+    3 = Myrtille
+    4 = Framboise
+    5 = Champignon
+
+    6 = Argile
+    7 = Terre
+    8 = Roche
+
+     */
+    protected int typeRessource;
 
     public Tuile() {
         this.rayon = 21;
@@ -28,6 +45,7 @@ public class Tuile {
         Image surbrillanceI = new Image("Image_Tuile/SB.png");
         this.surbrillance = new ImageView(surbrillanceI);
         this.pheromone = new ImageView();
+        this.typeRessource = 0;
     }
 
 
@@ -87,6 +105,14 @@ public class Tuile {
 
     public void setNomDuPossedeur(String nomDuPossedeur) {
         this.nomDuPossedeur = nomDuPossedeur;
+    }
+
+    public int getTypeRessource() {
+        return typeRessource;
+    }
+
+    public void setTypeRessource(int typeRessource) {
+        this.typeRessource = typeRessource;
     }
 }
 

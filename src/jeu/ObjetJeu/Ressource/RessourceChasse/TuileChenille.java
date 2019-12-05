@@ -3,6 +3,7 @@ package jeu.ObjetJeu.Ressource.RessourceChasse;
 public class TuileChenille extends TuileChasse {
     public TuileChenille() {
         super();
+        this.typeRessource = 2;
     }
 
     @Override

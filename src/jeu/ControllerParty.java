@@ -12,6 +12,7 @@ import jeu.ObjetJeu.Objectif.Objectif;
 import jeu.ObjetJeu.Ressource.Tuile;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class ControllerParty {
     public Model model;
@@ -31,7 +32,6 @@ public class ControllerParty {
         this.model = model;
         this.viewParty = viewParty;
     }
-
 
     void lancer_parti() {
         viewParty.p.getChildren().clear();
@@ -54,7 +54,6 @@ public class ControllerParty {
             viewParty.liste_objectif.setText(viewParty.liste_objectif.getText() + o + "\n");
         }
 
-
         for (Fourmi f: model.getCurrentPlayer().getListeFourmi()) {
             f.imageFourmi.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -64,7 +63,6 @@ public class ControllerParty {
             });
         }
     }
-
 
     public void changerVueTerrierPlateau() {
         if (viewParty.p.getBackground().getImages().get(0).equals(bk_image_plateau)) {
@@ -113,27 +111,8 @@ public class ControllerParty {
                     if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
                         //on regarde si notre clique est sur l'une des tuiles disponible
                         if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
-                            if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                                //on regarde si le clique est à trois tuiles max de la fourmi
-                                if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                                    mouvement_fourmi(r);
-                                    passerTour();
-                                }
-                            } else if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
-                                //on regarde si le clique est à trois tuiles max de la fourmi
-                                if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                                    mouvement_fourmi(r);
-                                    passerTour();
-                                }
-                            } else if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
-                                //on regarde si le clique est à trois tuiles max de la fourmi
-                                if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                                    mouvement_fourmi(r);
-                                    passerTour();
-                                }
-                            } else if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                                //on regarde si le clique est à trois tuiles max de la fourmi
-                                if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
+                            if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
+                                if (Math.pow((r.getPosX()) - fourmiClique.getX() - 10, 2) + Math.pow((r.getPosY()) - fourmiClique.getY() - 12, 2) < Math.pow(144, 2)) {
                                     mouvement_fourmi(r);
                                     passerTour();
                                 }
@@ -156,11 +135,37 @@ public class ControllerParty {
         // Deplacement de la fourmi
         fourmiClique.setX(r.getPosX());
         fourmiClique.setY(r.getPosY());
+        System.out.println(Arrays.toString(model.getCurrentPlayer().getTabNbrRessource()));
         // ajout de la tuile dans la liste ressource du joueur si personne n'est déjà passé dessus
         if (r.isTuileRessource()) {
             r.setNomDuPossedeur(model.getCurrentPlayer().getPseudo());
             if (fourmiClique.recupere(r)) {
-                model.getCurrentPlayer().getListeRessource().add(r);
+                switch (r.getTypeRessource()){
+                    case 0:
+                        System.out.println("t    pris un scarabe");
+                        model.getCurrentPlayer().getTabNbrRessource()[0]+=1;
+                        break;
+                    case 1:
+                        model.getCurrentPlayer().getTabNbrRessource()[1]+=1;
+                        break;
+                    case 2:
+                        model.getCurrentPlayer().getTabNbrRessource()[2]+=1;
+                        break;
+                    case 3:
+                        model.getCurrentPlayer().getTabNbrRessource()[3]+=1;
+                        break;
+                    case 4:
+                        model.getCurrentPlayer().getTabNbrRessource()[4]+=1;
+                        break;
+                    case 5:
+                        model.getCurrentPlayer().getTabNbrRessource()[5]+=1;
+                        break;
+                    case 6:
+                        model.getCurrentPlayer().getTabNbrRessource()[6]+=1;
+                        break;
+                }
+                System.out.println(Arrays.toString(model.getCurrentPlayer().getTabNbrRessource()));
+                model.miseAjourResscource();
                 r.setTuileRessource(false);
                 viewParty.p.getChildren().add(r.pheromone);
             }
@@ -173,28 +178,10 @@ public class ControllerParty {
                 viewParty.p.getChildren().remove(r.surbrillance);
             }
             fourmiClique = f;
-            for (Tuile r : model.getListeRessourcesDispo() ) {
+            for (Tuile r : model.getListeRessourcesDispo()){
                 if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
-
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
-                        if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
-                        if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
+                    if (Math.pow((r.getPosX()) - fourmiClique.getX()-10, 2) + Math.pow((r.getPosY()) - fourmiClique.getY()-12, 2) < Math.pow(144, 2)) {
+                        viewParty.p.getChildren().add(r.surbrillance);
                     }
                 }
             }
@@ -212,16 +199,8 @@ public class ControllerParty {
             f.imageFourmi.setOnMouseClicked(null);
         }
 
+        model.endormissementFourmi(fourmiClique);
 
-        model.getListeInsectesPasEncoreJoue().remove(fourmiClique);
-
-        model.getListeInsectesDejaJoue().add(fourmiClique);
-
-
-        if (model.getListeInsectesPasEncoreJoue().isEmpty()){
-            model.getListeInsectesPasEncoreJoue().addAll(model.getListeInsectesDejaJoue());
-            model.getListeInsectesDejaJoue().clear();
-        }
         fourmiClique = null;
 
         // on selectionne le nouveau joueur si c'est le dernier joueur qui vient de jouer, on retourne au début de la liste joueur
@@ -249,8 +228,3 @@ public class ControllerParty {
         }
     }
 }
-
-
-
-
-

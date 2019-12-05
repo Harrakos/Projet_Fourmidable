@@ -4,6 +4,8 @@ import javafx.scene.image.Image;
 import jeu.ObjetJeu.Fourmi.Fourmi;
 import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import jeu.ObjetJeu.Joueur;
+import jeu.ObjetJeu.Objectif.Objectif;
+import jeu.ObjetJeu.Objectif.ObjectifChasse;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileChenille;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileCoccinelle;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileScarabe;
@@ -13,6 +15,7 @@ import jeu.ObjetJeu.Ressource.Tuile;
 import jeu.ObjetJeu.Ressource.RessourceFermiere.TuileMyrtille;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Model {
 
@@ -166,6 +169,38 @@ public class Model {
     public void sortieTerrier(Fourmi fourmiClique) {
         currentPlayer.getListFourmiTerrier().remove(fourmiClique);
         listeFourmisPlateau.add(fourmiClique);
+    }
+
+    public void endormissementFourmi(Fourmi fourmiClique) {
+        listeInsectesPasEncoreJoue.remove(fourmiClique);
+        listeInsectesDejaJoue.add(fourmiClique);
+
+
+        if (listeInsectesPasEncoreJoue.isEmpty()){
+           listeInsectesPasEncoreJoue.addAll(listeInsectesDejaJoue);
+           listeInsectesDejaJoue.clear();
+        }
+
+    }
+
+    public void miseAjourResscource() {
+
+        int[] tab = currentPlayer.getTabNbrRessource();
+        System.out.println(Arrays.toString(tab));
+        for (Objectif o : currentPlayer.getListeObjectif()){
+            switch (o.getTypeObjectif()){
+                case 0:
+                    o.setMessage(tab[0],tab[1],tab[2]);
+                    break;
+                case 1:
+                    o.setMessage(tab[6],tab[7],tab[8]);
+                    break;
+                case 2:
+                    o.setMessage(tab[3],tab[4],tab[5]);
+                    break;
+            }
+        }
+
     }
 }
 
