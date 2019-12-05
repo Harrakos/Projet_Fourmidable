@@ -153,5 +153,19 @@ public class Model {
         }
         return cpttab;
     }
+
+    public void nouveauJoueur() {
+        if (listeJoueurs.indexOf(currentPlayer) < nbreJoueurs-1) {
+            currentPlayer = listeJoueurs.get(listeJoueurs.indexOf(currentPlayer) + 1);
+        }else {
+            currentPlayer = listeJoueurs.get(0);
+        }
+
+    }
+
+    public void sortieTerrier(Fourmi fourmiClique) {
+        currentPlayer.getListFourmiTerrier().remove(fourmiClique);
+        listeFourmisPlateau.add(fourmiClique);
+    }
 }
 

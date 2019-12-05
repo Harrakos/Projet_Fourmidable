@@ -146,8 +146,7 @@ public class ControllerParty {
                     fourmiClique.setX(model.getCurrentPlayer().getPositionTerrierJoueur()[0]);
                     fourmiClique.setY(model.getCurrentPlayer().getPositionTerrierJoueur()[1]);
                     viewParty.p.getChildren().remove(fourmiClique.imageFourmi);
-                    model.getCurrentPlayer().getListFourmiTerrier().remove(fourmiClique);
-                    model.getListeFourmisPlateau().add(fourmiClique);
+                    model.sortieTerrier(fourmiClique);
                     changerVueTerrierPlateau();
                 }
             }
@@ -164,8 +163,6 @@ public class ControllerParty {
                 model.getCurrentPlayer().getListeRessource().add(r);
                 r.setTuileRessource(false);
                 viewParty.p.getChildren().add(r.pheromone);
-                System.out.println(r);
-                System.out.println(model.getCurrentPlayer().getListeRessource());
             }
         }
     }
@@ -178,6 +175,7 @@ public class ControllerParty {
             fourmiClique = f;
             for (Tuile r : model.getListeRessourcesDispo() ) {
                 if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
+
                     if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
                         if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(162, 2)) {
                             viewParty.p.getChildren().add(r.surbrillance);
@@ -213,26 +211,22 @@ public class ControllerParty {
         for (Fourmi f : model.getCurrentPlayer().getListeFourmi()){
             f.imageFourmi.setOnMouseClicked(null);
         }
-        // remove à la liste des fourmis pas encore joué
-        model.getListeInsectesPasEncoreJoue().remove(fourmiClique);
-        // add à la liste des fourmis deja jouer
-        model.getListeInsectesDejaJoue().add(fourmiClique);
-        fourmiClique = null;
 
-        // si le tableau de liste des insectes pas encore joué est vide on refait un grand tour,
-        // on met le contenu du tableau deja joué dans tableau pas encore joue et on vide le tableau pasEncoreJoue
+
+        model.getListeInsectesPasEncoreJoue().remove(fourmiClique);
+
+        model.getListeInsectesDejaJoue().add(fourmiClique);
+
+
         if (model.getListeInsectesPasEncoreJoue().isEmpty()){
-            System.out.println("nouveau tour");
             model.getListeInsectesPasEncoreJoue().addAll(model.getListeInsectesDejaJoue());
             model.getListeInsectesDejaJoue().clear();
         }
+        fourmiClique = null;
 
         // on selectionne le nouveau joueur si c'est le dernier joueur qui vient de jouer, on retourne au début de la liste joueur
-        if (model.listeJoueurs.indexOf(model.getCurrentPlayer()) < model.getNbreJoueurs()-1) {
-            model.setCurrentPlayer(model.listeJoueurs.get(model.listeJoueurs.indexOf(model.getCurrentPlayer()) + 1));
-        }else {
-            model.setCurrentPlayer(model.listeJoueurs.get(0));
-        }
+        model.nouveauJoueur();
+
         // On change le pseudo et les objectifs
         viewParty.nom_joueur.setText(model.getCurrentPlayer().getPseudo());
         viewParty.liste_objectif.setText("Objectif : ");
@@ -253,44 +247,6 @@ public class ControllerParty {
                 }
             }
         }
-    }
-
-    private void selectionFourmi(MouseEvent event, Fourmi f){
-        if (surPlateau) {
-            for (Tuile r : model.getListeRessourcesDispo()) {
-                viewParty.p.getChildren().remove(r.surbrillance);
-            }
-            fourmiClique = f;
-            for (Tuile r : model.getListeRessourcesDispo() ) {
-                if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) { // vers le haut a droite
-                        if (Math.pow((r.getPosX()) - fourmiClique.getX(), 2) + Math.pow((r.getPosY()) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() > fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) { // vers le haut a gauche
-                        if (Math.pow((r.getPosX() + 15.5) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 11.5) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() < fourmiClique.getY()) {
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() - 15) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                    if (r.getPosX() < fourmiClique.getX() && r.getPosY() > fourmiClique.getY()) {
-                        if (Math.pow((r.getPosX() - 20) - fourmiClique.getX(), 2) + Math.pow((r.getPosY() + 11.5) - fourmiClique.getY(), 2) < Math.pow(160, 2)) {
-                            viewParty.p.getChildren().add(r.surbrillance);
-                        }
-                    }
-                }
-            }
-        }else {
-            fourmiClique = f;
-        }
-    }
-    private void passerTour(){
-
     }
 }
 

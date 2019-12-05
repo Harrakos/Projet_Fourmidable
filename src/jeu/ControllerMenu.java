@@ -215,7 +215,13 @@ public class ControllerMenu implements EventHandler {
             model.setNbreJoueurs(6);
             changeScene("Menu/SelectionFourmi/Six_joueurs.fxml",btnImageSixJoueurs);
         }
-        if (mouseEvent.getSource() == btn_launch_game ){
+
+        if (mouseEvent.getSource() == btnImageRetour){
+            changeScene("Menu/Menu.fxml",btnImageRetour);
+        }
+    }
+    public void pressButtonSelectbJoueursTempo(ActionEvent actionEvent) throws IOException {
+        if (actionEvent.getSource() == btn_launch_game ){
             TextField[] tabPseudo = {label_joueur1,label_joueur2,label_joueur3,label_joueur4,label_joueur5,label_joueur6};
             ColorPicker[] tabColor = {color_picker1,color_picker2,color_picker3,color_picker4,color_picker5,color_picker6};
             for (int i = 0; i< model.getNbreJoueurs(); i++){
@@ -226,10 +232,9 @@ public class ControllerMenu implements EventHandler {
             ControllerMenu controllerMenu = loader.getController();
             controllerMenu.initData(model.listeJoueurs.get(joueurEnSelection).getPseudo());
         }
-        if (mouseEvent.getSource() == btnImageRetour){
-            changeScene("Menu/Menu.fxml",btnImageRetour);
-        }
+
     }
+
 
     @SuppressWarnings("Duplicates")
     public void pressButtonChoixFourmiObjectif(MouseEvent mouseEvent) throws IOException {
