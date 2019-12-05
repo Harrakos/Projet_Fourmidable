@@ -31,39 +31,24 @@ public class ObjectifCreuseur extends Objectif {
         return message;
     }
 
-    public void setMessage(int r1, int r2, int r3) {
+    public int[] setMessage(int r1, int r2, int r3) {
         argileActu = r1;
         terreActu = r2;
         rocheActu = r3;
 
         message = "Objectif Minage : \n";
-        message = message+" Argile : "+ argileActu+"/"+argileMax+"\n";
-        message = message+" Terre : "+ terreActu+"/"+terreMax+"\n";
-        message = message+" Roche : "+ rocheMax+"/"+rocheMax+"\n";
+        if (argileMax != 0)
+            message = message+" Argile : "+ argileActu+"/"+argileMax+"\n";
+        if (terreMax != 0)
+            message = message+" Terre : "+ terreActu+"/"+terreMax+"\n";
+        if (rocheMax != 0)
+            message = message+" Roche : "+ rocheActu+"/"+rocheMax+"\n";
+        if(argileActu == argileMax && terreActu == terreMax && rocheActu == rocheMax) {
+            message = "Objectif Réussi !";
+            this.accompli = true;
+        }
+        return new int[]{argileMax,terreMax,rocheMax};
 
-    }
 
-    public int getArgileActu() {
-        return argileActu;
-    }
-
-    public void setArgileActu(int argileActu) {
-        this.argileActu = argileActu;
-    }
-
-    public int getTerreActu() {
-        return terreActu;
-    }
-
-    public void setTerreActu(int terreActu) {
-        this.terreActu = terreActu;
-    }
-
-    public int getRocheActu() {
-        return rocheActu;
-    }
-
-    public void setRocheActu(int rocheActu) {
-        this.rocheActu = rocheActu;
     }
 }

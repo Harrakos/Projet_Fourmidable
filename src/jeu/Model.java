@@ -1,11 +1,8 @@
 package jeu;
 
-import javafx.scene.image.Image;
 import jeu.ObjetJeu.Fourmi.Fourmi;
-import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import jeu.ObjetJeu.Joueur;
 import jeu.ObjetJeu.Objectif.Objectif;
-import jeu.ObjetJeu.Objectif.ObjectifChasse;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileChenille;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileCoccinelle;
 import jeu.ObjetJeu.Ressource.RessourceChasse.TuileScarabe;
@@ -13,46 +10,39 @@ import jeu.ObjetJeu.Ressource.RessourceFermiere.TuileChampigon;
 import jeu.ObjetJeu.Ressource.RessourceFermiere.TuileFramboise;
 import jeu.ObjetJeu.Ressource.Tuile;
 import jeu.ObjetJeu.Ressource.RessourceFermiere.TuileMyrtille;
-
 import java.util.ArrayList;
-import java.util.Arrays;
+class Model {
 
-public class Model {
-
-    private int pm;
     private int nbreJoueurs;
-    public ArrayList<Joueur> listeJoueurs;
+    ArrayList<Joueur> listeJoueurs;
     private Joueur currentPlayer;
     private ArrayList<Tuile> listeRessourcesDispo;
     private ArrayList<Fourmi> listeFourmisPlateau;
     private ArrayList<Fourmi> listeInsectesDejaJoue;
     private ArrayList<Fourmi> listeInsectesPasEncoreJoue;
 
-
-    public Model(){
+    Model(){
         nbreJoueurs = 0;
         listeJoueurs = new ArrayList<>();
         listeFourmisPlateau = new ArrayList<>();
         remplissagelisteRessourcesDispo();
-        pm = 3;
         listeInsectesDejaJoue = new ArrayList<>();
         listeInsectesPasEncoreJoue = new ArrayList<>();
-
     }
 
-    public int getNbreJoueurs() {
+    int getNbreJoueurs() {
         return nbreJoueurs;
     }
 
-    public void setNbreJoueurs(int nbreJoueurs) {
+    void setNbreJoueurs(int nbreJoueurs) {
         this.nbreJoueurs = nbreJoueurs;
     }
 
-    public Joueur getCurrentPlayer() {
+    Joueur getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public void setCurrentPlayer(Joueur currentPlayer) {
+    void setCurrentPlayer(Joueur currentPlayer) {
         if (currentPlayer == null) {
             this.currentPlayer = listeJoueurs.get(0);
         } else {
@@ -60,43 +50,14 @@ public class Model {
         }
     }
 
-    public ArrayList<Tuile> getListeRessourcesDispo() {
+    ArrayList<Tuile> getListeRessourcesDispo() {
         return listeRessourcesDispo;
     }
 
-    public void setListeRessourcesDispo(ArrayList<Tuile> listeRessourcesDispo) {
-        this.listeRessourcesDispo = listeRessourcesDispo;
-    }
+    ArrayList<Fourmi> getListeFourmisPlateau() { return listeFourmisPlateau; }
 
-    public ArrayList<Fourmi> getListeFourmisPlateau() { return listeFourmisPlateau;
-    }
-
-    public void setListeFourmisPlateau(ArrayList<Fourmi> listeFourmisPlateau) {
-        this.listeFourmisPlateau = listeFourmisPlateau;
-    }
-
-    public int getPm() {
-        return pm;
-    }
-
-    public void setPm(int pm) {
-        this.pm = pm;
-    }
-
-    public ArrayList<Fourmi> getListeInsectesDejaJoue() {
-        return listeInsectesDejaJoue;
-    }
-
-    public void setListeInsectesDejaJoue(ArrayList<Fourmi> listeInsectesDejaJoue) {
-        this.listeInsectesDejaJoue = listeInsectesDejaJoue;
-    }
-
-    public ArrayList<Fourmi> getListeInsectesPasEncoreJoue() {
+    ArrayList<Fourmi> getListeInsectesPasEncoreJoue() {
         return listeInsectesPasEncoreJoue;
-    }
-
-    public void setListeInsectesPasEncoreJoue(ArrayList<Fourmi> listeInsectesPasEncoreJoue) {
-        this.listeInsectesPasEncoreJoue = listeInsectesPasEncoreJoue;
     }
 
     private void remplissagelisteRessourcesDispo(){
@@ -135,7 +96,7 @@ public class Model {
 
         i = remplissageLigne(8,296,466,tabTuile,i);
         i = remplissageLigne(4,413,580,tabTuile,i);
-        i = remplissageLigne(3, 413, 624, tabTuile,i);
+       remplissageLigne(3, 413, 624, tabTuile,i);
 
 
     }
@@ -144,34 +105,30 @@ public class Model {
         double posXmod = posXDepart;
         double posYmod = posYDepart;
         for (int y = 0; y <nbrRepetition; y++){
-           // if (tabTuile[cpttab].isTuileRessource()) {
                 tabTuile[cpttab].setPosX(posXmod);
                 tabTuile[cpttab].setPosY(posYmod);
                 posXmod = posXmod +38.5;
                 posYmod = posYmod +22;
                 listeRessourcesDispo.add(tabTuile[cpttab]);
                 cpttab++;
-         //  }
-
         }
         return cpttab;
     }
 
-    public void nouveauJoueur() {
+    void nouveauJoueur() {
         if (listeJoueurs.indexOf(currentPlayer) < nbreJoueurs-1) {
             currentPlayer = listeJoueurs.get(listeJoueurs.indexOf(currentPlayer) + 1);
         }else {
             currentPlayer = listeJoueurs.get(0);
         }
-
     }
 
-    public void sortieTerrier(Fourmi fourmiClique) {
+    void sortieTerrier(Fourmi fourmiClique) {
         currentPlayer.getListFourmiTerrier().remove(fourmiClique);
         listeFourmisPlateau.add(fourmiClique);
     }
 
-    public void endormissementFourmi(Fourmi fourmiClique) {
+    void endormissementFourmi(Fourmi fourmiClique) {
         listeInsectesPasEncoreJoue.remove(fourmiClique);
         listeInsectesDejaJoue.add(fourmiClique);
 
@@ -183,24 +140,42 @@ public class Model {
 
     }
 
-    public void miseAjourResscource() {
-
+    boolean miseAjourResscource() {
+        int cptObjectifAccompli=0;
+        int[] tabREssourceUtilise = new int[3];
         int[] tab = currentPlayer.getTabNbrRessource();
-        System.out.println(Arrays.toString(tab));
         for (Objectif o : currentPlayer.getListeObjectif()){
             switch (o.getTypeObjectif()){
                 case 0:
-                    o.setMessage(tab[0],tab[1],tab[2]);
+                    tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[0],currentPlayer.getTabNbrRessource()[1],currentPlayer.getTabNbrRessource()[2]);
+                    if (o.isAccompli()) {
+                        currentPlayer.getTabNbrRessource()[0] -= tabREssourceUtilise[0];
+                        currentPlayer.getTabNbrRessource()[1] -= tabREssourceUtilise[1];
+                        currentPlayer.getTabNbrRessource()[2] -= tabREssourceUtilise[2];
+                    }
                     break;
                 case 1:
-                    o.setMessage(tab[6],tab[7],tab[8]);
+                    o.setMessage(currentPlayer.getTabNbrRessource()[6],currentPlayer.getTabNbrRessource()[7],currentPlayer.getTabNbrRessource()[8]);
+                    if (o.isAccompli()) {
+                        currentPlayer.getTabNbrRessource()[3] -= tabREssourceUtilise[0];
+                        currentPlayer.getTabNbrRessource()[4] -= tabREssourceUtilise[1];
+                        currentPlayer.getTabNbrRessource()[5] -= tabREssourceUtilise[2];
+                    }
                     break;
                 case 2:
-                    o.setMessage(tab[3],tab[4],tab[5]);
+                    o.setMessage(currentPlayer.getTabNbrRessource()[3],currentPlayer.getTabNbrRessource()[4],currentPlayer.getTabNbrRessource()[5]);
+                    if (o.isAccompli()) {
+                        currentPlayer.getTabNbrRessource()[6] -= tabREssourceUtilise[0];
+                        currentPlayer.getTabNbrRessource()[7] -= tabREssourceUtilise[1];
+                        currentPlayer.getTabNbrRessource()[8] -= tabREssourceUtilise[2];
+                    }
                     break;
             }
         }
-
+        for (Objectif ob : currentPlayer.getListeObjectif()){
+            if (ob.isAccompli()) cptObjectifAccompli += 1;
+        }
+        return cptObjectifAccompli == currentPlayer.getListeObjectif().size();
     }
 }
 

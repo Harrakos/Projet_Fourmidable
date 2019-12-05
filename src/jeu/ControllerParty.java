@@ -135,14 +135,12 @@ public class ControllerParty {
         // Deplacement de la fourmi
         fourmiClique.setX(r.getPosX());
         fourmiClique.setY(r.getPosY());
-        System.out.println(Arrays.toString(model.getCurrentPlayer().getTabNbrRessource()));
         // ajout de la tuile dans la liste ressource du joueur si personne n'est déjà passé dessus
         if (r.isTuileRessource()) {
             r.setNomDuPossedeur(model.getCurrentPlayer().getPseudo());
             if (fourmiClique.recupere(r)) {
                 switch (r.getTypeRessource()){
                     case 0:
-                        System.out.println("t    pris un scarabe");
                         model.getCurrentPlayer().getTabNbrRessource()[0]+=1;
                         break;
                     case 1:
@@ -164,8 +162,10 @@ public class ControllerParty {
                         model.getCurrentPlayer().getTabNbrRessource()[6]+=1;
                         break;
                 }
-                System.out.println(Arrays.toString(model.getCurrentPlayer().getTabNbrRessource()));
-                model.miseAjourResscource();
+                if (model.miseAjourResscource()){
+                    viewParty.p.getChildren().clear();
+                    viewParty.p.getChildren().add(new Label("Bravo "+model.getCurrentPlayer().getPseudo()+" tu as gagné !!!!"));
+                }
                 r.setTuileRessource(false);
                 viewParty.p.getChildren().add(r.pheromone);
             }

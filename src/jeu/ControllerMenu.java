@@ -89,8 +89,6 @@ public class ControllerMenu implements EventHandler {
         ControllerMenu.model = model;
     }
 
-    void initialize(){}
-
     private void initData(String c_pseudo){
         pseudo.setText(c_pseudo);
     }

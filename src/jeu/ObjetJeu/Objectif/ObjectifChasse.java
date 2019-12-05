@@ -32,17 +32,22 @@ public class ObjectifChasse extends Objectif {
         return message;
     }
 
-    public void setMessage(int r1, int r2, int r3) {
+    public int[] setMessage(int r1, int r2, int r3) {
         scarabeActu = r1;
         coccinelleActu = r2;
         chenilleActu = r3;
 
         message = "Objectif Chasse : \n";
-        message = message + " Scarabe : " + scarabeActu + "/" + scarabeMax + "\n";
-        message = message + " Coccinelle :  " + coccinelleActu + "/" + coccinelleMax + "\n";
-        message = message + " Chenille : " + chenilleActu + "/" + chenilleMax + "\n";
-
+        if (scarabeMax != 0)
+            message = message + " Scarabe : " + scarabeActu + "/" + scarabeMax + "\n";
+        if (coccinelleMax != 0)
+            message = message + " Coccinelle :  " + coccinelleActu + "/" + coccinelleMax + "\n";
+        if (chenilleMax != 0)
+            message = message + " Chenille : " + chenilleActu + "/" + chenilleMax + "\n";
+        if(chenilleActu == chenilleMax && coccinelleActu == coccinelleMax && scarabeActu == scarabeMax){
+            message = "Objectif Réussi !";
+            this.accompli = true;
+        }
+        return new int[]{scarabeMax,coccinelleMax,chenilleMax};
     }
-
-
 }

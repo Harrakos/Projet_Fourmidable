@@ -30,39 +30,24 @@ public class ObjectifFermier extends Objectif {
         return message;
     }
 
-    public void setMessage(int r1, int r2, int r3) {
+    public int[] setMessage(int r1, int r2, int r3) {
         myrtilleActu = r1;
         framboiseActu = r2;
         champignonActu = r3;
 
         message = "Objectif Recolte : \n";
-        message = message+" Framboise : "+framboiseActu+"/"+framboiseMax+"\n";
-        message = message+" Myrtille :  "+myrtilleActu+"/"+myrtilleMax+"\n";
-        message = message+" Champignon : "+champignonActu+"/"+champignonMax+"\n";
+        if (framboiseMax != 0)
+            message = message+" Framboise : "+framboiseActu+"/"+framboiseMax+"\n";
+        if (myrtilleMax != 0)
+            message = message+" Myrtille :  "+myrtilleActu+"/"+myrtilleMax+"\n";
+        if (champignonMax != 0)
+            message = message+" Champignon : "+champignonActu+"/"+champignonMax+"\n";
+        if(framboiseActu == framboiseMax && myrtilleActu == myrtilleMax && champignonActu == champignonMax) {
+            message = "Objectif Réussi !";
+            this.accompli = true;
+        }
+        return new int[]{myrtilleMax,framboiseMax,champignonMax};
 
-    }
 
-    public int getFramboiseActu() {
-        return framboiseActu;
-    }
-
-    public void setFramboiseActu(int framboiseActu) {
-        this.framboiseActu = framboiseActu;
-    }
-
-    public int getMyrtilleActu() {
-        return myrtilleActu;
-    }
-
-    public void setMyrtilleActu(int myrtilleActu) {
-        this.myrtilleActu = myrtilleActu;
-    }
-
-    public int getChampignonActu() {
-        return champignonActu;
-    }
-
-    public void setChampignonActu(int champignonActu) {
-        this.champignonActu = champignonActu;
     }
 }
