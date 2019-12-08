@@ -11,6 +11,8 @@ import jeu.ObjetJeu.Ressource.RessourceFermiere.TuileFramboise;
 import jeu.ObjetJeu.Ressource.Tuile;
 import jeu.ObjetJeu.Ressource.RessourceFermiere.TuileMyrtille;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 class Model {
 
     private int nbreJoueurs;
@@ -139,43 +141,43 @@ class Model {
     }
 
     boolean miseAjourResscource() {
-        int cptObjectifAccompli=0;
         int[] tabREssourceUtilise = new int[3];
         int[] tab = currentPlayer.getTabNbrRessource();
-        for (Objectif o : currentPlayer.getListeObjectif()) {
-            if (!o.isAccompli()) {
-                switch (o.getTypeObjectif()) {
-                    case 0:
-                        tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[0], currentPlayer.getTabNbrRessource()[1], currentPlayer.getTabNbrRessource()[2]);
-                        if (o.isAccompli()) {
-                            currentPlayer.getTabNbrRessource()[0] -= tabREssourceUtilise[0];
-                            currentPlayer.getTabNbrRessource()[1] -= tabREssourceUtilise[1];
-                            currentPlayer.getTabNbrRessource()[2] -= tabREssourceUtilise[2];
-                        }
-                        break;
-                    case 1:
-                        o.setMessage(currentPlayer.getTabNbrRessource()[6], currentPlayer.getTabNbrRessource()[7], currentPlayer.getTabNbrRessource()[8]);
-                        if (o.isAccompli()) {
-                            currentPlayer.getTabNbrRessource()[3] -= tabREssourceUtilise[0];
-                            currentPlayer.getTabNbrRessource()[4] -= tabREssourceUtilise[1];
-                            currentPlayer.getTabNbrRessource()[5] -= tabREssourceUtilise[2];
-                        }
-                        break;
-                    case 2:
-                        o.setMessage(currentPlayer.getTabNbrRessource()[3], currentPlayer.getTabNbrRessource()[4], currentPlayer.getTabNbrRessource()[5]);
-                        if (o.isAccompli()) {
-                            currentPlayer.getTabNbrRessource()[6] -= tabREssourceUtilise[0];
-                            currentPlayer.getTabNbrRessource()[7] -= tabREssourceUtilise[1];
-                            currentPlayer.getTabNbrRessource()[8] -= tabREssourceUtilise[2];
-                        }
-                        break;
-                }
+        //Iterator<Objectif> io = currentPlayer.getListeObjectif().listIterator();
+        Objectif o;
+        for (int i = 0; i< currentPlayer.getListeObjectif().size(); i++){
+            o = currentPlayer.getListeObjectif().get(i);
+            switch (o.getTypeObjectif()) {
+                case 0:
+                    tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[0], currentPlayer.getTabNbrRessource()[1], currentPlayer.getTabNbrRessource()[2]);
+                    if (o.isAccompli()) {
+                        currentPlayer.getListeObjectif().remove(o);
+                        currentPlayer.getTabNbrRessource()[0] -= tabREssourceUtilise[0];
+                        currentPlayer.getTabNbrRessource()[1] -= tabREssourceUtilise[1];
+                        currentPlayer.getTabNbrRessource()[2] -= tabREssourceUtilise[2];
+                    }
+                    break;
+                case 1:
+                    o.setMessage(currentPlayer.getTabNbrRessource()[6], currentPlayer.getTabNbrRessource()[7], currentPlayer.getTabNbrRessource()[8]);
+                    if (o.isAccompli()) {
+                        currentPlayer.getListeObjectif().remove(o);
+                        currentPlayer.getTabNbrRessource()[3] -= tabREssourceUtilise[0];
+                        currentPlayer.getTabNbrRessource()[4] -= tabREssourceUtilise[1];
+                        currentPlayer.getTabNbrRessource()[5] -= tabREssourceUtilise[2];
+                    }
+                    break;
+                case 2:
+                    o.setMessage(currentPlayer.getTabNbrRessource()[3], currentPlayer.getTabNbrRessource()[4], currentPlayer.getTabNbrRessource()[5]);
+                    if (o.isAccompli()) {
+                        currentPlayer.getListeObjectif().remove(o);
+                        currentPlayer.getTabNbrRessource()[6] -= tabREssourceUtilise[0];
+                        currentPlayer.getTabNbrRessource()[7] -= tabREssourceUtilise[1];
+                        currentPlayer.getTabNbrRessource()[8] -= tabREssourceUtilise[2];
+                    }
+                    break;
             }
         }
-        for (Objectif ob : currentPlayer.getListeObjectif()){
-            if (ob.isAccompli()) cptObjectifAccompli += 1;
-        }
-        return cptObjectifAccompli == currentPlayer.getListeObjectif().size();
+        return currentPlayer.getListeObjectif().size() == 0;
     }
 }
 

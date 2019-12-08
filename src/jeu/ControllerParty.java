@@ -1,6 +1,7 @@
 package jeu;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -12,6 +13,7 @@ import jeu.ObjetJeu.Objectif.Objectif;
 import jeu.ObjetJeu.Ressource.Tuile;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class ControllerParty {
@@ -103,7 +105,7 @@ public class ControllerParty {
         }
     }
 
-    public void deplacer_fourmi(MouseEvent event) {
+    public void deplacer_fourmi(MouseEvent event) throws IOException {
         // condition qui veut dire que si aucune fourmi n'a été sélectionner ou si on en séléctionné une mais qu'on reclique dessus il ne se passe rien
         if ((fourmiClique != null) && !((event.getX() > fourmiClique.imageFourmi.getX() && event.getX() < fourmiClique.imageFourmi.getX() + 25) && (event.getY() > fourmiClique.imageFourmi.getY() && event.getY() < fourmiClique.imageFourmi.getY() + 25))) {
             if (surPlateau) {
@@ -131,7 +133,7 @@ public class ControllerParty {
             }
         }
     }
-    private void mouvement_fourmi(Tuile r) {
+    private void mouvement_fourmi(Tuile r) throws IOException {
         // Deplacement de la fourmi
         fourmiClique.setX(r.getPosX());
         fourmiClique.setY(r.getPosY());
@@ -163,8 +165,14 @@ public class ControllerParty {
                         break;
                 }
                 if (model.miseAjourResscource()){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
+                    viewParty.p.getScene().setRoot(loader.load());
                     viewParty.p.getChildren().clear();
-                    viewParty.p.getChildren().add(new Label("Bravo "+model.getCurrentPlayer().getPseudo()+" tu as gagné !!!!"));
+
+
+
+
+
                 }
                 r.setTuileRessource(false);
                 viewParty.p.getChildren().add(r.pheromone);

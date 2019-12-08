@@ -17,6 +17,7 @@ import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
 import org.w3c.dom.ls.LSOutput;
 
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 public class ViewParty {
 
@@ -60,7 +61,12 @@ public class ViewParty {
         });
         p.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) { controllerParty.deplacer_fourmi(event);
+            public void handle(MouseEvent event) {
+                try {
+                    controllerParty.deplacer_fourmi(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
