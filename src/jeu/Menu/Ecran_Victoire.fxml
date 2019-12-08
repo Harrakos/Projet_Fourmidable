@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.ControllerMenu">
+<AnchorPane prefHeight="585.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.ControllerMenu">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="585.0" fitWidth="630.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Image_Menu/ImageHerbe.png" />
+         </image></ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="215.0" layoutY="459.0" onMouseClicked="#pressButtonMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Image_choix_joueurs/bouton_retour.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="pseudo" alignment="CENTER" contentDisplay="CENTER" layoutX="219.0" layoutY="148.0" prefHeight="55.0" prefWidth="173.0" text="pseudo" textAlignment="CENTER">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="207.0" layoutY="93.0" prefHeight="55.0" prefWidth="217.0" text="BRAVO !!!">
+         <font>
+            <Font name="Georgia" size="46.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="176.0" layoutY="205.0" prefHeight="55.0" prefWidth="279.0" text="Tu as gagné">
+         <font>
+            <Font name="Georgia" size="46.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

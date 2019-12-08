@@ -25,10 +25,10 @@ public class ControllerParty {
     private boolean surPlateau = true;
 
     private Image plateau = new Image("jeu/Images/plateau.jpeg");
-    private BackgroundImage bk_image_plateau = new BackgroundImage(plateau, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    public BackgroundImage bk_image_plateau = new BackgroundImage(plateau, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
     private Image terrier = new Image("jeu/Images/plateau_indi.jpg");
-    private BackgroundImage bk_image_terrier = new BackgroundImage(terrier, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    public BackgroundImage bk_image_terrier = new BackgroundImage(terrier, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
     ControllerParty(Model model, ViewParty viewParty) {
         this.model = model;
@@ -165,14 +165,12 @@ public class ControllerParty {
                         break;
                 }
                 if (model.miseAjourResscource()){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/Ecran_Victoire.fxml"));
+                    viewParty.p.getScene().getWindow().setWidth(630);
+                    viewParty.p.getScene().getWindow().setHeight(585);
                     viewParty.p.getScene().setRoot(loader.load());
-                    viewParty.p.getChildren().clear();
-
-
-
-
-
+                    ControllerMenu controllerMenu = loader.getController();
+                    controllerMenu.initData(model.getCurrentPlayer().getPseudo());
                 }
                 r.setTuileRessource(false);
                 viewParty.p.getChildren().add(r.pheromone);
@@ -237,4 +235,5 @@ public class ControllerParty {
             }
         }
     }
+
 }
