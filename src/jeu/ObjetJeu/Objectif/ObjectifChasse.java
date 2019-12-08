@@ -44,7 +44,7 @@ public class ObjectifChasse extends Objectif {
             message = message + " Coccinelle :  " + coccinelleActu + "/" + coccinelleMax + "\n";
         if (chenilleMax != 0)
             message = message + " Chenille : " + chenilleActu + "/" + chenilleMax + "\n";
-        if(chenilleActu == chenilleMax && coccinelleActu == coccinelleMax && scarabeActu == scarabeMax){
+        if(chenilleActu >= chenilleMax && coccinelleActu >= coccinelleMax && scarabeActu >= scarabeMax){
             message = "Objectif Réussi !";
             this.accompli = true;
         }

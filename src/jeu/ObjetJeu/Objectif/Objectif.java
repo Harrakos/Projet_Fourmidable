@@ -2,7 +2,7 @@ package jeu.ObjetJeu.Objectif;
 
 public class Objectif {
     int typeObjectif;
-    protected boolean accompli;
+    boolean accompli;
 
     public Objectif() {
         this.accompli = false;

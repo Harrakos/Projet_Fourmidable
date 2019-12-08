@@ -210,7 +210,9 @@ public class ControllerParty {
         viewParty.nom_joueur.setText(model.getCurrentPlayer().getPseudo());
         viewParty.liste_objectif.setText("Objectif : ");
         for (Objectif o : model.getCurrentPlayer().getListeObjectif()) {
+
             viewParty.liste_objectif.setText(viewParty.liste_objectif.getText() + o + "\n");
+
         }
 
         //on active les fourmis du nouveau joueur qui n'ont pas encore été joué

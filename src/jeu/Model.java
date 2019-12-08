@@ -132,44 +132,44 @@ class Model {
         listeInsectesPasEncoreJoue.remove(fourmiClique);
         listeInsectesDejaJoue.add(fourmiClique);
 
-
         if (listeInsectesPasEncoreJoue.isEmpty()){
            listeInsectesPasEncoreJoue.addAll(listeInsectesDejaJoue);
            listeInsectesDejaJoue.clear();
         }
-
     }
 
     boolean miseAjourResscource() {
         int cptObjectifAccompli=0;
         int[] tabREssourceUtilise = new int[3];
         int[] tab = currentPlayer.getTabNbrRessource();
-        for (Objectif o : currentPlayer.getListeObjectif()){
-            switch (o.getTypeObjectif()){
-                case 0:
-                    tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[0],currentPlayer.getTabNbrRessource()[1],currentPlayer.getTabNbrRessource()[2]);
-                    if (o.isAccompli()) {
-                        currentPlayer.getTabNbrRessource()[0] -= tabREssourceUtilise[0];
-                        currentPlayer.getTabNbrRessource()[1] -= tabREssourceUtilise[1];
-                        currentPlayer.getTabNbrRessource()[2] -= tabREssourceUtilise[2];
-                    }
-                    break;
-                case 1:
-                    o.setMessage(currentPlayer.getTabNbrRessource()[6],currentPlayer.getTabNbrRessource()[7],currentPlayer.getTabNbrRessource()[8]);
-                    if (o.isAccompli()) {
-                        currentPlayer.getTabNbrRessource()[3] -= tabREssourceUtilise[0];
-                        currentPlayer.getTabNbrRessource()[4] -= tabREssourceUtilise[1];
-                        currentPlayer.getTabNbrRessource()[5] -= tabREssourceUtilise[2];
-                    }
-                    break;
-                case 2:
-                    o.setMessage(currentPlayer.getTabNbrRessource()[3],currentPlayer.getTabNbrRessource()[4],currentPlayer.getTabNbrRessource()[5]);
-                    if (o.isAccompli()) {
-                        currentPlayer.getTabNbrRessource()[6] -= tabREssourceUtilise[0];
-                        currentPlayer.getTabNbrRessource()[7] -= tabREssourceUtilise[1];
-                        currentPlayer.getTabNbrRessource()[8] -= tabREssourceUtilise[2];
-                    }
-                    break;
+        for (Objectif o : currentPlayer.getListeObjectif()) {
+            if (!o.isAccompli()) {
+                switch (o.getTypeObjectif()) {
+                    case 0:
+                        tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[0], currentPlayer.getTabNbrRessource()[1], currentPlayer.getTabNbrRessource()[2]);
+                        if (o.isAccompli()) {
+                            currentPlayer.getTabNbrRessource()[0] -= tabREssourceUtilise[0];
+                            currentPlayer.getTabNbrRessource()[1] -= tabREssourceUtilise[1];
+                            currentPlayer.getTabNbrRessource()[2] -= tabREssourceUtilise[2];
+                        }
+                        break;
+                    case 1:
+                        o.setMessage(currentPlayer.getTabNbrRessource()[6], currentPlayer.getTabNbrRessource()[7], currentPlayer.getTabNbrRessource()[8]);
+                        if (o.isAccompli()) {
+                            currentPlayer.getTabNbrRessource()[3] -= tabREssourceUtilise[0];
+                            currentPlayer.getTabNbrRessource()[4] -= tabREssourceUtilise[1];
+                            currentPlayer.getTabNbrRessource()[5] -= tabREssourceUtilise[2];
+                        }
+                        break;
+                    case 2:
+                        o.setMessage(currentPlayer.getTabNbrRessource()[3], currentPlayer.getTabNbrRessource()[4], currentPlayer.getTabNbrRessource()[5]);
+                        if (o.isAccompli()) {
+                            currentPlayer.getTabNbrRessource()[6] -= tabREssourceUtilise[0];
+                            currentPlayer.getTabNbrRessource()[7] -= tabREssourceUtilise[1];
+                            currentPlayer.getTabNbrRessource()[8] -= tabREssourceUtilise[2];
+                        }
+                        break;
+                }
             }
         }
         for (Objectif ob : currentPlayer.getListeObjectif()){
