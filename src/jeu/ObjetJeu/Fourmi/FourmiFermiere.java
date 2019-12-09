@@ -9,6 +9,8 @@ import jeu.ObjetJeu.Ressource.Tuile;
 public class FourmiFermiere extends Fourmi {
     public FourmiFermiere(Image imageFourmiFermiere) {
         super(imageFourmiFermiere);
+        this.typeFourmi = 1;
+
     }
 
     @Override

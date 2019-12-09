@@ -42,7 +42,7 @@ public class ObjectifFermier extends Objectif {
             message = message+" Myrtille :  "+myrtilleActu+"/"+myrtilleMax+"\n";
         if (champignonMax != 0)
             message = message+" Champignon : "+champignonActu+"/"+champignonMax+"\n";
-        if(framboiseActu == framboiseMax && myrtilleActu == myrtilleMax && champignonActu == champignonMax) {
+        if(framboiseActu >= framboiseMax && myrtilleActu >= myrtilleMax && champignonActu >= champignonMax) {
             message = "Objectif Réussi !";
             this.accompli = true;
         }

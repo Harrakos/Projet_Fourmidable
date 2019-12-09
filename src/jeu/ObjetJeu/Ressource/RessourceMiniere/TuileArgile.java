@@ -5,6 +5,10 @@ public class TuileArgile extends TuileMiniere {
         super();
         this.typeRessource = 6;
     }
+    public TuileArgile(boolean accessible) {
+        super(accessible);
+        this.typeRessource = 6;
+    }
 
     @Override
     public String toString() {

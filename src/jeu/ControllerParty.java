@@ -84,6 +84,13 @@ public class ControllerParty {
                     viewParty.p.getChildren().remove(r.pheromone);
                 }
             }
+            for (int x = 0; x<5; x++) {
+                for (int y = 0; y < 4; y++) {
+                    if (model.getCurrentPlayer().getTabMine()[x][y] !=null && !model.getCurrentPlayer().getTabMine()[x][y].isTuileRessource()){
+                        viewParty.p.getChildren().add(model.getCurrentPlayer().getTabMine()[x][y].pheromone);
+                    }
+                }
+            }
 
             surPlateau = false;
         } else {
@@ -99,6 +106,13 @@ public class ControllerParty {
             for (Tuile r : model.getListeRessourcesDispo()){
                 if (!r.isTuileRessource()){
                     viewParty.p.getChildren().add(r.pheromone);
+                }
+            }
+            for (int x = 0; x<5; x++) {
+                for (int y = 0; y < 4; y++) {
+                    if (model.getCurrentPlayer().getTabMine()[x][y] !=null && !model.getCurrentPlayer().getTabMine()[x][y].isTuileRessource()){
+                        viewParty.p.getChildren().remove(model.getCurrentPlayer().getTabMine()[x][y].pheromone);
+                    }
                 }
             }
             surPlateau = true;
@@ -123,12 +137,22 @@ public class ControllerParty {
                     }
                 }
             } else {
-                if (Math.pow(event.getX() - 288, 2) + (Math.pow(event.getY() - 42, 2)) < Math.pow(20, 2)) {
+                if ((Math.pow(event.getX() - 288, 2) + (Math.pow(event.getY() - 42, 2)) < Math.pow(20, 2))&& fourmiClique.getTypeFourmi()!=2) {
                     fourmiClique.setX(model.getCurrentPlayer().getPositionTerrierJoueur()[0]);
                     fourmiClique.setY(model.getCurrentPlayer().getPositionTerrierJoueur()[1]);
                     viewParty.p.getChildren().remove(fourmiClique.imageFourmi);
                     model.sortieTerrier(fourmiClique);
                     changerVueTerrierPlateau();
+                }else if ( fourmiClique.getTypeFourmi()==2){
+                    for (int x = 0; x<5; x++) {
+                        for (int y = 0; y < 4; y++) {
+                            if (  model.getCurrentPlayer().getTabMine()[x][y] != null &&Math.pow(event.getX() - model.getCurrentPlayer().getTabMine()[x][y].getPosX(), 2) + (Math.pow(event.getY() - model.getCurrentPlayer().getTabMine()[x][y].getPosY(), 2)) < Math.pow(model.getCurrentPlayer().getTabMine()[x][y].getRayon(), 2)){
+                                mouvement_fourmi(model.getCurrentPlayer().getTabMine()[x][y]);
+                                passerTour();
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -140,6 +164,7 @@ public class ControllerParty {
         // ajout de la tuile dans la liste ressource du joueur si personne n'est déjà passé dessus
         if (r.isTuileRessource()) {
             r.setNomDuPossedeur(model.getCurrentPlayer().getPseudo());
+            System.out.println(r);
             if (fourmiClique.recupere(r)) {
                 switch (r.getTypeRessource()){
                     case 0:
@@ -163,6 +188,30 @@ public class ControllerParty {
                     case 6:
                         model.getCurrentPlayer().getTabNbrRessource()[6]+=1;
                         break;
+                    case 7:
+                        model.getCurrentPlayer().getTabNbrRessource()[7]+=1;
+                        break;
+                    case 8:
+                        model.getCurrentPlayer().getTabNbrRessource()[8]+=1;
+                        break;
+                }
+                if(!surPlateau){
+                    for (int x = 0; x<5; x++) {
+                        for (int y = 0; y < 4; y++) {
+                            if ( model.getCurrentPlayer().getTabMine()[x][y] != null && model.getCurrentPlayer().getTabMine()[x][y] == r){
+                                if (x-1 >0)
+                                    model.getCurrentPlayer().getTabMine()[x-1][y].setAccessible(true);
+                                if (x+1<5)
+                                    model.getCurrentPlayer().getTabMine()[x+1][y].setAccessible(true);
+                                if (y-1 >0)
+                                    model.getCurrentPlayer().getTabMine()[x][y-1].setAccessible(true);
+                                if (y+1<4)
+                                    model.getCurrentPlayer().getTabMine()[x][y+1].setAccessible(true);
+                            }
+
+                        }
+                    }
+
                 }
                 if (model.miseAjourResscource()){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu/Ecran_Victoire.fxml"));
@@ -186,13 +235,29 @@ public class ControllerParty {
             fourmiClique = f;
             for (Tuile r : model.getListeRessourcesDispo()){
                 if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
-                    if (Math.pow((r.getPosX()) - fourmiClique.getX()-10, 2) + Math.pow((r.getPosY()) - fourmiClique.getY()-12, 2) < Math.pow(144, 2)) {
+                    if ((Math.pow((r.getPosX()) - fourmiClique.getX() - 10, 2) + Math.pow((r.getPosY()) - fourmiClique.getY() - 12, 2)) < Math.pow(144, 2)) {
                         viewParty.p.getChildren().add(r.surbrillance);
                     }
                 }
             }
         }else {
+            /*for (int x = 0; x<5; x++) {
+                for (int y = 0; y < 4; y++) {
+                    viewParty.p.getChildren().remove(model.getCurrentPlayer().getTabMine()[x][y].surbrillance);
+                }*/
+            //}
             fourmiClique = f;
+            if (fourmiClique.getTypeFourmi() == 2){
+
+                for (int x = 0; x<5; x++){
+                    for (int y = 0; y<4; y++){
+                        if (model.getCurrentPlayer().getTabMine()[x][y] != null &&model.getCurrentPlayer().getTabMine()[x][y].isAccessible()){
+                            viewParty.p.getChildren().add(model.getCurrentPlayer().getTabMine()[x][y].surbrillance);
+                        }
+
+                    }
+                }
+            }
         }
     }
     private void passerTour(){
@@ -203,6 +268,20 @@ public class ControllerParty {
         // désactivation des fourmis du joueur
         for (Fourmi f : model.getCurrentPlayer().getListeFourmi()){
             f.imageFourmi.setOnMouseClicked(null);
+        }
+        if (!surPlateau) {
+            changerVueTerrierPlateau();
+            for (Fourmi f : model.getCurrentPlayer().getListFourmiTerrier()){
+                viewParty.p.getChildren().remove(f.imageFourmi);
+            }
+            for (int x = 0; x<5; x++){
+                for (int y = 0; y<4; y++) {
+                    if (model.getCurrentPlayer().getTabMine()[x][y] != null && model.getCurrentPlayer().getTabMine()[x][y].isAccessible()){
+                        viewParty.p.getChildren().remove(model.getCurrentPlayer().getTabMine()[x][y].surbrillance);
+                    }
+                }
+            }
+
         }
 
         model.endormissementFourmi(fourmiClique);

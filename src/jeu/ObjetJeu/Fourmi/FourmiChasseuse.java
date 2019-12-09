@@ -9,6 +9,7 @@ public class FourmiChasseuse extends Fourmi {
 
     public FourmiChasseuse(Image imageFourmiChasseuse) {
         super(imageFourmiChasseuse);
+        this.typeFourmi = 0;
     }
 
     @Override
@@ -17,10 +18,6 @@ public class FourmiChasseuse extends Fourmi {
     }
 
     public boolean recupere(Tuile r){
-        if (r instanceof TuileChasse){
-            return true;
-        }else {
-            return false;
-        }
+        return r instanceof TuileChasse;
     }
 }

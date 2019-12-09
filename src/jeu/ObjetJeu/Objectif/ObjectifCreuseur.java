@@ -43,7 +43,7 @@ public class ObjectifCreuseur extends Objectif {
             message = message+" Terre : "+ terreActu+"/"+terreMax+"\n";
         if (rocheMax != 0)
             message = message+" Roche : "+ rocheActu+"/"+rocheMax+"\n";
-        if(argileActu == argileMax && terreActu == terreMax && rocheActu == rocheMax) {
+        if(argileActu >= argileMax && terreActu >= terreMax && rocheActu >= rocheMax) {
             message = "Objectif Réussi !";
             this.accompli = true;
         }

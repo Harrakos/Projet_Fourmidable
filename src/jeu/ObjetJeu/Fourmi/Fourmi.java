@@ -7,6 +7,14 @@ import jeu.ObjetJeu.Ressource.Tuile;
 public class Fourmi {
     public ImageView imageFourmi;
 
+    /*
+    chasse = 0
+    recolte = 1
+    minage = 2
+
+     */
+    protected int typeFourmi;
+
     public Fourmi(Image imageFourmi ) {
         this.imageFourmi = new ImageView(imageFourmi);
     }
@@ -36,5 +44,13 @@ public class Fourmi {
 
     public boolean recupere(Tuile r) {
         return false;
+    }
+
+    public int getTypeFourmi() {
+        return typeFourmi;
+    }
+
+    public void setTypeFourmi(int typeFourmi) {
+        this.typeFourmi = typeFourmi;
     }
 }

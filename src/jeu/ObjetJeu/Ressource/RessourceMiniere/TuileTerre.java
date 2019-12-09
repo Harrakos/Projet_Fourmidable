@@ -5,6 +5,10 @@ public class TuileTerre extends TuileMiniere {
         super();
         this.typeRessource = 7;
     }
+    public TuileTerre(boolean accessible) {
+        super(accessible);
+        this.typeRessource = 7;
+    }
 
     @Override
     public String toString() {

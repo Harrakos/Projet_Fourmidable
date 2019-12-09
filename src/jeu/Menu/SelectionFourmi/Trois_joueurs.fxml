@@ -31,7 +31,7 @@
             </children>
         </GridPane>
         <Button fx:id="btn_retour" layoutX="264.0" layoutY="349.0" mnemonicParsing="false" onAction="#pressButtonMenu" prefHeight="25.0" prefWidth="74.0" text="retour" />
-        <Button fx:id="btn_launch_game" layoutX="247.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressButtonSelectbJoueurs" text="Lancer partie">
+        <Button fx:id="btn_launch_game" layoutX="247.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressButtonSelectbJoueursTempo" text="Lancer partie">
             <font>
                 <Font size="15.0" />
             </font>

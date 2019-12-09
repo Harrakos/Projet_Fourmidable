@@ -114,5 +114,7 @@ public class Tuile {
     public void setTypeRessource(int typeRessource) {
         this.typeRessource = typeRessource;
     }
+
+
 }
 
