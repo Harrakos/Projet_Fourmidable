@@ -17,10 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jeu.ObjetJeu.*;
-import jeu.ObjetJeu.Fourmi.Fourmi;
-import jeu.ObjetJeu.Fourmi.FourmiChasseuse;
-import jeu.ObjetJeu.Fourmi.FourmiCreuseuse;
-import jeu.ObjetJeu.Fourmi.FourmiFermiere;
+import jeu.ObjetJeu.Fourmi.*;
 import jeu.ObjetJeu.Objectif.ObjectifChasse;
 import jeu.ObjetJeu.Objectif.ObjectifCreuseur;
 import jeu.ObjetJeu.Objectif.ObjectifFermier;
@@ -357,7 +354,12 @@ public class ControllerMenu implements EventHandler {
                     joueur.getListFourmiTerrier().add(fourmi);
                     model.getListeInsectesPasEncoreJoue().add(fourmi);
                 }
-                for (int i =0; i<3; i++){
+                fourmi = new Predateur(new Image("Images_fourmi/predateur.png"));
+                joueur.getListeFourmi().add(fourmi);
+                joueur.getListFourmiTerrier().add(fourmi);
+                model.getListeInsectesPasEncoreJoue().add(fourmi);
+
+                for (int i =0; i<4; i++){
                     model.listeJoueurs.get(joueurEnSelection).getListeFourmi().get(i).setX(287);
                     model.listeJoueurs.get(joueurEnSelection).getListeFourmi().get(i).setY(84+40*i);
                 }

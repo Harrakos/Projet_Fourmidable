@@ -12,7 +12,9 @@ public class Tuile {
     private boolean tuileRessource;
     public ImageView surbrillance;
     public ImageView pheromone;
+    public ImageView detruit;
     private String nomDuPossedeur = "";
+    private boolean tuileDetruite = false;
     /*
     -1 = tuile non cliquable
 
@@ -38,6 +40,9 @@ public class Tuile {
         this.surbrillance = new ImageView(surbrillanceI);
         Image pheromoneI = new Image("Image_Tuile/Pheromone.png");
         this.pheromone = new ImageView(pheromoneI);
+        Image detruitI = new Image("Image_Tuile/detruit.png");
+        this.detruit = new ImageView(detruitI);
+
     }
 
     public Tuile(boolean tuileRessource){
@@ -45,6 +50,9 @@ public class Tuile {
         Image surbrillanceI = new Image("Image_Tuile/SB.png");
         this.surbrillance = new ImageView(surbrillanceI);
         this.pheromone = new ImageView();
+        this.detruit = new ImageView();
+
+
         this.typeRessource = 0;
     }
 
@@ -58,6 +66,8 @@ public class Tuile {
         this.surbrillance = new ImageView(surbrillanceI);
         Image pheromoneI = new Image("Image_Tuile/Pheromone.png");
         this.pheromone = new ImageView(pheromoneI);
+        Image detruitI = new Image("Image_Tuile/detruit.png");
+        this.detruit = new ImageView(detruitI);
 
     }
 
@@ -69,6 +79,7 @@ public class Tuile {
         this.posX = posX;
         surbrillance.setX(posX-32);
         pheromone.setX(posX);
+        detruit.setX(posX-32);
     }
     public double getPosY() {
         return posY;
@@ -77,6 +88,8 @@ public class Tuile {
         this.posY = posY;
         surbrillance.setY(posY-35);
         pheromone.setY(posY);
+        detruit.setY(posY-35);
+
 
     }
 
@@ -115,6 +128,12 @@ public class Tuile {
         this.typeRessource = typeRessource;
     }
 
+    public boolean isTuileDetruite() {
+        return tuileDetruite;
+    }
 
+    public void setTuileDetruite(boolean tuileDetruite) {
+        this.tuileDetruite = tuileDetruite;
+    }
 }
 

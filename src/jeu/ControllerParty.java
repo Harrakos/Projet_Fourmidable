@@ -83,6 +83,8 @@ public class ControllerParty {
                 if (!r.isTuileRessource()){
                     viewParty.p.getChildren().remove(r.pheromone);
                 }
+                if (r.isTuileDetruite())
+                    viewParty.p.getChildren().remove(r.detruit);
             }
             for (int x = 0; x<5; x++) {
                 for (int y = 0; y < 4; y++) {
@@ -107,6 +109,9 @@ public class ControllerParty {
                 if (!r.isTuileRessource()){
                     viewParty.p.getChildren().add(r.pheromone);
                 }
+                if (r.isTuileDetruite()){
+                    viewParty.p.getChildren().add(r.detruit);
+                }
             }
             for (int x = 0; x<5; x++) {
                 for (int y = 0; y < 4; y++) {
@@ -124,6 +129,14 @@ public class ControllerParty {
         if ((fourmiClique != null) && !((event.getX() > fourmiClique.imageFourmi.getX() && event.getX() < fourmiClique.imageFourmi.getX() + 25) && (event.getY() > fourmiClique.imageFourmi.getY() && event.getY() < fourmiClique.imageFourmi.getY() + 25))) {
             if (surPlateau) {
                 for (Tuile r : model.getListeRessourcesDispo()) {
+                    if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
+                        if (fourmiClique.getTypeFourmi() == -1) {
+                            System.out.println("coucou");
+                            mouvement_fourmi(r);
+                            passerTour();
+                            return;
+                        }
+                    }
                     if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
                         //on regarde si notre clique est sur l'une des tuiles disponible
                         if (Math.pow(event.getX() - r.getPosX(), 2) + (Math.pow(event.getY() - r.getPosY(), 2)) < Math.pow(r.getRayon(), 2)) {
@@ -162,6 +175,12 @@ public class ControllerParty {
         fourmiClique.setX(r.getPosX());
         fourmiClique.setY(r.getPosY());
         // ajout de la tuile dans la liste ressource du joueur si personne n'est déjà passé dessus
+        if (fourmiClique.getTypeFourmi() == -1){
+            r.setTuileRessource(false);
+            r.setTuileDetruite(true);
+            viewParty.p.getChildren().add(r.detruit);
+            return;
+        }
         if (r.isTuileRessource()) {
             r.setNomDuPossedeur(model.getCurrentPlayer().getPseudo());
             System.out.println(r);
@@ -233,10 +252,16 @@ public class ControllerParty {
                 viewParty.p.getChildren().remove(r.surbrillance);
             }
             fourmiClique = f;
-            for (Tuile r : model.getListeRessourcesDispo()){
-                if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
-                    if ((Math.pow((r.getPosX()) - fourmiClique.getX() - 10, 2) + Math.pow((r.getPosY()) - fourmiClique.getY() - 12, 2)) < Math.pow(144, 2)) {
-                        viewParty.p.getChildren().add(r.surbrillance);
+            if (fourmiClique.getTypeFourmi() == -1){
+                for (Tuile r : model.getListeRessourcesDispo()) {
+                    viewParty.p.getChildren().add(r.surbrillance);
+                }
+            } else {
+                for (Tuile r : model.getListeRessourcesDispo()) {
+                    if (r.isTuileRessource() || r.getNomDuPossedeur().equals(model.getCurrentPlayer().getPseudo())) {
+                        if ((Math.pow((r.getPosX()) - fourmiClique.getX() - 10, 2) + Math.pow((r.getPosY()) - fourmiClique.getY() - 12, 2)) < Math.pow(144, 2)) {
+                            viewParty.p.getChildren().add(r.surbrillance);
+                        }
                     }
                 }
             }
