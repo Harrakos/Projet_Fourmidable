@@ -2,7 +2,6 @@ package jeu.ObjetJeu.Ressource;
 
 import javafx.scene.image.Image;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Tuile {
@@ -32,6 +31,11 @@ public class Tuile {
 
      */
     protected int typeRessource;
+
+
+    public Tuile(int t ) {
+
+    }
 
     public Tuile() {
         this.rayon = 21;

@@ -75,7 +75,7 @@ public class ViewParty {
         lancerbtn = new Button("Lancer la game");
         changerVue = new Button("aller au terrier");
         rectangle_joueur = new Rectangle(80,20, Color.WHITE);
-        rectangle_objectif = new Rectangle(170,300, Color.WHITE);
+        rectangle_objectif = new Rectangle(170,500, Color.WHITE);
     }
 
      void ajoutAttribut(){

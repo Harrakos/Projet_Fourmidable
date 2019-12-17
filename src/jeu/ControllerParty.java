@@ -36,6 +36,8 @@ public class ControllerParty {
     }
 
     void lancer_parti() {
+        model.remplissagelisteRessourcesDispo();
+
         viewParty.p.getChildren().clear();
         viewParty.p.getScene().getWindow().setWidth(1147);
         viewParty.p.getScene().getWindow().setHeight(836);

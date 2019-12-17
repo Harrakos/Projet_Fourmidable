@@ -14,38 +14,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-class Model {
+public class Model {
 
     private int nbreJoueurs;
-    ArrayList<Joueur> listeJoueurs;
+    public ArrayList<Joueur> listeJoueurs;
     private Joueur currentPlayer;
     private ArrayList<Tuile> listeRessourcesDispo;
     private ArrayList<Fourmi> listeFourmisPlateau;
     private ArrayList<Fourmi> listeInsectesDejaJoue;
     private ArrayList<Fourmi> listeInsectesPasEncoreJoue;
 
-    Model(){
+
+
+    public Model(){
         nbreJoueurs = 0;
         listeJoueurs = new ArrayList<>();
         listeFourmisPlateau = new ArrayList<>();
-        remplissagelisteRessourcesDispo();
         listeInsectesDejaJoue = new ArrayList<>();
         listeInsectesPasEncoreJoue = new ArrayList<>();
     }
 
-    int getNbreJoueurs() {
+    public int getNbreJoueurs() {
         return nbreJoueurs;
     }
 
-    void setNbreJoueurs(int nbreJoueurs) {
+    public void setNbreJoueurs(int nbreJoueurs) {
         this.nbreJoueurs = nbreJoueurs;
     }
 
-    Joueur getCurrentPlayer() {
+    public Joueur getCurrentPlayer() {
         return currentPlayer;
     }
 
-    void setCurrentPlayer(Joueur currentPlayer) {
+    public void setCurrentPlayer(Joueur currentPlayer) {
         if (currentPlayer == null) {
             this.currentPlayer = listeJoueurs.get(0);
         } else {
@@ -63,7 +64,7 @@ class Model {
         return listeInsectesPasEncoreJoue;
     }
 
-    private void remplissagelisteRessourcesDispo(){
+    public void remplissagelisteRessourcesDispo(){
         listeRessourcesDispo = new ArrayList<>();
         Tuile[] tabTuile = {new TuileMyrtille(), new Tuile(false), new TuileCoccinelle(),
                 new TuileChenille(), new TuileFramboise(), new TuileCoccinelle(), new TuileFramboise(),
@@ -118,7 +119,7 @@ class Model {
         return cpttab;
     }
 
-    void nouveauJoueur() {
+    public void nouveauJoueur() {
         if (listeJoueurs.indexOf(currentPlayer) < nbreJoueurs-1) {
             currentPlayer = listeJoueurs.get(listeJoueurs.indexOf(currentPlayer) + 1);
         }else {
@@ -144,10 +145,7 @@ class Model {
     boolean miseAjourResscource() {
         int[] tabREssourceUtilise = new int[3];
         int[] tab = currentPlayer.getTabNbrRessource();
-        //Iterator<Objectif> io = currentPlayer.getListeObjectif().listIterator();
         Objectif o;
-        System.out.println("avant"+Arrays.toString(currentPlayer.getTabNbrRessource()));
-
         for (int i = 0; i< currentPlayer.getListeObjectif().size(); i++){
             o = currentPlayer.getListeObjectif().get(i);
             switch (o.getTypeObjectif()) {
@@ -159,7 +157,6 @@ class Model {
                         currentPlayer.getTabNbrRessource()[1] -= tabREssourceUtilise[1];
                         currentPlayer.getTabNbrRessource()[2] -= tabREssourceUtilise[2];
                     }
-                    //o.setMessage(currentPlayer.getTabNbrRessource()[0], currentPlayer.getTabNbrRessource()[1], currentPlayer.getTabNbrRessource()[2]);
                     break;
                 case 1:
                     tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[6], currentPlayer.getTabNbrRessource()[7], currentPlayer.getTabNbrRessource()[8]);
@@ -169,7 +166,6 @@ class Model {
                         currentPlayer.getTabNbrRessource()[7] -= tabREssourceUtilise[1];
                         currentPlayer.getTabNbrRessource()[8] -= tabREssourceUtilise[2];
                     }
-                    //o.setMessage(currentPlayer.getTabNbrRessource()[6], currentPlayer.getTabNbrRessource()[7], currentPlayer.getTabNbrRessource()[8]);
                     break;
                 case 2:
                     tabREssourceUtilise = o.setMessage(currentPlayer.getTabNbrRessource()[3], currentPlayer.getTabNbrRessource()[4], currentPlayer.getTabNbrRessource()[5]);
@@ -179,12 +175,9 @@ class Model {
                         currentPlayer.getTabNbrRessource()[4] -= tabREssourceUtilise[1];
                         currentPlayer.getTabNbrRessource()[5] -= tabREssourceUtilise[2];
                     }
-                   // o.setMessage(currentPlayer.getTabNbrRessource()[3], currentPlayer.getTabNbrRessource()[4], currentPlayer.getTabNbrRessource()[5]);
                     break;
             }
         }
-        System.out.println("apres"+Arrays.toString(currentPlayer.getTabNbrRessource()));
-
         return currentPlayer.getListeObjectif().size() == 0;
     }
 }

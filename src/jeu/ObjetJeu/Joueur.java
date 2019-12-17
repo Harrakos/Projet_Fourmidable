@@ -24,6 +24,10 @@ public class Joueur {
     private ArrayList<Fourmi> listFourmiTerrier;
     private int[] positionTerrierJoueur;
 
+    public Joueur(String nom) {
+        pseudo = nom;
+    }
+
     public Joueur(String pseudo, Color couleur) {
 
         this.pseudo = pseudo;

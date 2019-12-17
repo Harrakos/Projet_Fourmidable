@@ -337,19 +337,19 @@ public class ControllerMenu implements EventHandler {
                     joueur.getListeObjectif().add(new ObjectifFermier());
 
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_chasseuse.getText()); i++){
-                    fourmi = new FourmiChasseuse(new Image("Images_fourmi/"+joueurEnSelection+"_Chasseuse.png"));
+                    fourmi = new FourmiChasseuse(new Image("Images_fourmi/" +joueurEnSelection+"_Chasseuse.png"));
                     joueur.getListeFourmi().add(fourmi);
                     joueur.getListFourmiTerrier().add(fourmi);
                     model.getListeInsectesPasEncoreJoue().add(fourmi);
                 }
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_creuseuse.getText()); i++){
-                    fourmi = new FourmiCreuseuse(new Image("Images_fourmi/"+joueurEnSelection+"_Creuseuse.png"));
+                    fourmi = new FourmiCreuseuse(new Image("Images_fourmi/" +joueurEnSelection+"_Creuseuse.png"));
                     joueur.getListeFourmi().add(fourmi);
                     joueur.getListFourmiTerrier().add(fourmi);
                     model.getListeInsectesPasEncoreJoue().add(fourmi);
                 }
                 for (int i = 0; i < Integer.parseInt(cpt_fourmi_fermiere.getText()); i++){
-                    fourmi = new FourmiFermiere(new Image("Images_fourmi/"+joueurEnSelection+"_Fermiere.png"));
+                    fourmi = new FourmiFermiere(new Image("Images_fourmi/" +joueurEnSelection+"_Fermiere.png"));
                     joueur.getListeFourmi().add(fourmi);
                     joueur.getListFourmiTerrier().add(fourmi);
                     model.getListeInsectesPasEncoreJoue().add(fourmi);
